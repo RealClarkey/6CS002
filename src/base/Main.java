@@ -17,7 +17,7 @@ import javax.swing.JScrollPane;
 public class Main {
     private String playerName;
     public List<Domino> dominoList;
-    public List<Domino> _g;
+    public List<Domino> guessList;
     public int[][] grid = new int[7][8];
     public int[][] gg = new int[7][8];
     int mode = -1;
@@ -49,14 +49,14 @@ public class Main {
         }
     }
     private void generateGuesses() {
-        _g = new LinkedList<Domino>();
+        guessList = new LinkedList<Domino>();
         int count = 0;
         int x = 0;
         int y = 0;
         for (int l = 0; l <= 6; l++) {
             for (int h = l; h <= 6; h++) {
                 Domino d = new Domino(h, l);
-                _g.add(d);
+                guessList.add(d);
                 count++;
             }
         }
@@ -82,7 +82,7 @@ public class Main {
                 gg[r][c] = 9;
             }
         }
-        for (Domino d : _g) {
+        for (Domino d : guessList) {
             if (d.placed) {
                 gg[d.hy][d.hx] = d.high;
                 gg[d.ly][d.lx] = d.low;
@@ -217,7 +217,7 @@ public class Main {
         return null;
     }
     private Domino findGuessAt(int x, int y) {
-        for (Domino d : _g) {
+        for (Domino d : guessList) {
             if ((d.lx == x && d.ly == y) || (d.hx == x && d.hy == y)) {
                 return d;
             }
@@ -225,7 +225,7 @@ public class Main {
         return null;
     }
     private Domino findGuessByLH(int x, int y) {
-        for (Domino d : _g) {
+        for (Domino d : guessList) {
             if ((d.low == x && d.high == y) || (d.high == x && d.low == y)) {
                 return d;
             }
@@ -246,7 +246,7 @@ public class Main {
         }
     }
     private void printGuesses() {
-        for (Domino d : _g) {
+        for (Domino d : guessList) {
             System.out.println(d);
         }
     }
@@ -397,7 +397,7 @@ public class Main {
                                 printGuessGrid();
                                 break;
                             case 3:
-                                Collections.sort(_g);
+                                Collections.sort(guessList);
                                 printGuesses();
                                 break;
                             case 4:
@@ -822,7 +822,7 @@ public class Main {
         }
     }
     public void drawGuesses(Graphics g) {
-        for (Domino d : _g) {
+        for (Domino d : guessList) {
             pf.dp.drawDomino(g, d);
         }
     }
