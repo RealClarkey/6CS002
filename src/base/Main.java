@@ -15,6 +15,9 @@ import javax.swing.JScrollPane;
  * @version 2.0, 2014
  */
 public class Main {
+
+    private static final int MAX_DOMINO_SPOTS = 6;
+
     private String playerName;
     public List<Domino> dominoList;
     public List<Domino> guessList;
@@ -30,8 +33,8 @@ public class Main {
         int count = 0;
         int x = 0;
         int y = 0;
-        for (int l = 0; l <= 6; l++) {
-            for (int h = l; h <= 6; h++) {
+        for (int l = 0; l <= MAX_DOMINO_SPOTS; l++) {
+            for (int h = l; h <= MAX_DOMINO_SPOTS; h++) {
                 Domino d = new Domino(h, l);
                 dominoList.add(d);
                 d.place(x, y, x + 1, y);
@@ -53,8 +56,8 @@ public class Main {
         int count = 0;
         int x = 0;
         int y = 0;
-        for (int l = 0; l <= 6; l++) {
-            for (int h = l; h <= 6; h++) {
+        for (int l = 0; l <= MAX_DOMINO_SPOTS; l++) {
+            for (int h = l; h <= MAX_DOMINO_SPOTS; h++) {
                 Domino d = new Domino(h, l);
                 guessList.add(d);
                 count++;
@@ -578,7 +581,7 @@ public class Main {
                                         System.out.println("Which domino?");
                                         System.out.println("Number on one side?");
                                         int x4 = -9;
-                                        while (x4 < 0 || x4 > 6) {
+                                        while (x4 < 0 || x4 > MAX_DOMINO_SPOTS) {
                                             try {
                                                 String s3 = io.getString();
                                                 x4 = Integer.parseInt(s3);
@@ -588,7 +591,7 @@ public class Main {
                                         }
                                         System.out.println("Number on the other side?");
                                         int x5 = -9;
-                                        while (x5 < 0 || x5 > 6) {
+                                        while (x5 < 0 || x5 > MAX_DOMINO_SPOTS) {
                                             try {
                                                 String s3 = IOLibrary.getString();
                                                 x5 = Integer.parseInt(s3);
