@@ -639,7 +639,7 @@ public class Main {
                                     case 3: {
                                         score -= 2000;
                                         HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
-                                        for (int r = 0; r < 6; r++) {
+                                        for (int r = 0; r < GRID_ROWS -1; r++) {
                                             for (int c = 0; c < GRID_ROWS; c++) {
                                                 Domino hd = findGuessByLH(grid[r][c], grid[r][c + 1]);
                                                 Domino vd = findGuessByLH(grid[r][c], grid[r + 1][c]);
@@ -670,7 +670,7 @@ public class Main {
                                     case 4: {
                                         score -= 10000;
                                         HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
-                                        for (int r = 0; r < 6; r++) {
+                                        for (int r = 0; r < GRID_ROWS - 1; r++) {
                                             for (int c = 0; c < GRID_ROWS; c++) {
                                                 Domino hd = findGuessByLH(grid[r][c], grid[r][c + 1]);
                                                 Domino vd = findGuessByLH(grid[r][c], grid[r + 1][c]);
