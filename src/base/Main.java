@@ -77,8 +77,8 @@ public class Main {
     void collateGrid() {
         for (Domino d : dominoList) {
             if (!d.placed) {
-                grid[d.hy][d.hx] = 9;
-                grid[d.ly][d.lx] = 9;
+                grid[d.hy][d.hx] = EMPTY_CELL;
+                grid[d.ly][d.lx] = EMPTY_CELL;
             } else {
                 grid[d.hy][d.hx] = d.high;
                 grid[d.ly][d.lx] = d.low;
@@ -88,7 +88,7 @@ public class Main {
     void collateGuessGrid() {
         for (int r = 0; r < GRID_ROWS; r++) {
             for (int c = 0; c < GRID_COLUMNS; c++) {
-                guessGrid[r][c] = 9;
+                guessGrid[r][c] = EMPTY_CELL;
             }
         }
         for (Domino d : guessList) {
@@ -101,7 +101,7 @@ public class Main {
     int pg() {
         for (int are = 0; are < GRID_ROWS; are++) {
             for (int see = 0; see < GRID_COLUMNS; see++) {
-                if (grid[are][see] != 9) {
+                if (grid[are][see] != EMPTY_CELL) {
                     System.out.printf("%d", grid[are][see]);
                 } else {
                     System.out.print(".");
@@ -114,7 +114,7 @@ public class Main {
     int printGuessGrid() {
         for (int are = 0; are < GRID_ROWS; are++) {
             for (int see = 0; see < GRID_COLUMNS; see++) {
-                if (guessGrid[are][see] != 9) {
+                if (guessGrid[are][see] != EMPTY_CELL) {
                     System.out.printf("%d", guessGrid[are][see]);
                 } else {
                     System.out.print(".");
@@ -472,7 +472,7 @@ public class Main {
                                         break;
                                     }
 // check guessgrid to make sure the space is vacant
-                                    if (guessGrid[y][x] != 9 || guessGrid[y2][x2] != 9) {
+                                    if (guessGrid[y][x] != 9 || guessGrid[y2][x2] != EMPTY_CELL) {
                                         System.out.println("Those coordinates are not vacant");
                                         break;
                                     }
@@ -518,8 +518,8 @@ public class Main {
                                     System.out.println("Couln't find a domino there");
                                 } else {
                                     lkj.placed = false;
-                                    guessGrid[lkj.hy][lkj.hx] = 9;
-                                    guessGrid[lkj.ly][lkj.lx] = 9;
+                                    guessGrid[lkj.hy][lkj.hx] = EMPTY_CELL;
+                                    guessGrid[lkj.ly][lkj.lx] = EMPTY_CELL;
                                     score -= 1000;
                                     collateGuessGrid();
                                     pictureFrame.dp.repaint();
