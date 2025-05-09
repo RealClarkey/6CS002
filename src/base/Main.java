@@ -27,8 +27,8 @@ public class Main {
     private String playerName;
     public List<Domino> dominoList;
     public List<Domino> guessList;
-    public int[][] grid = new int[GRID_ROWS][8];
-    public int[][] guessGrid = new int[GRID_ROWS][8];
+    public int[][] grid = new int[GRID_ROWS][GRID_COLUMNS];
+    public int[][] guessGrid = new int[GRID_ROWS][GRID_COLUMNS];
     int mode = -1;
     int cheatingFlag;
     int score;
@@ -87,7 +87,7 @@ public class Main {
     }
     void collateGuessGrid() {
         for (int r = 0; r < GRID_ROWS; r++) {
-            for (int c = 0; c < 8; c++) {
+            for (int c = 0; c < GRID_COLUMNS; c++) {
                 guessGrid[r][c] = 9;
             }
         }
@@ -100,7 +100,7 @@ public class Main {
     }
     int pg() {
         for (int are = 0; are < GRID_ROWS; are++) {
-            for (int see = 0; see < 8; see++) {
+            for (int see = 0; see < GRID_COLUMNS; see++) {
                 if (grid[are][see] != 9) {
                     System.out.printf("%d", grid[are][see]);
                 } else {
@@ -113,7 +113,7 @@ public class Main {
     }
     int printGuessGrid() {
         for (int are = 0; are < GRID_ROWS; are++) {
-            for (int see = 0; see < 8; see++) {
+            for (int see = 0; see < GRID_COLUMNS; see++) {
                 if (guessGrid[are][see] != 9) {
                     System.out.printf("%d", guessGrid[are][see]);
                 } else {
@@ -414,7 +414,7 @@ public class Main {
                                 System.out.println("Column?");
 // make sure the user enters something valid
                                 int x = Location.getInt();
-                                while (x < 1 || x > 8) {
+                                while (x < 1 || x > GRID_COLUMNS) {
                                     x = Location.getInt();
                                 }
                                 System.out.println("Row?");
@@ -493,7 +493,7 @@ public class Main {
                                 System.out.println("Enter a position that the domino occupies");
                                 System.out.println("Column?");
                                 int x13 = -9;
-                                while (x13 < 1 || x13 > 8) {
+                                while (x13 < 1 || x13 > GRID_COLUMNS) {
                                     try {
                                         String s3 = io.getString();
                                         x13 = Integer.parseInt(s3);
@@ -613,7 +613,7 @@ public class Main {
                                         System.out.println("Which location?");
                                         System.out.println("Column?");
                                         int x3 = -9;
-                                        while (x3 < 1 || x3 > 8) {
+                                        while (x3 < 1 || x3 > GRID_COLUMNS) {
                                             try {
                                                 String s3 = IOLibrary.getString();
                                                 x3 = Integer.parseInt(s3);
