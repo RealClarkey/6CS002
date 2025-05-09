@@ -21,7 +21,7 @@ public class Main {
     public int[][] grid = new int[7][8];
     public int[][] gg = new int[7][8];
     int mode = -1;
-    int cf;
+    int cheatingFlag;
     int score;
     long startTime;
     PictureFrame pf = new PictureFrame();
@@ -354,7 +354,7 @@ public class Main {
                     generateGuesses();
                     collateGuessGrid();
                     mode = 1;
-                    cf = 0;
+                    cheatingFlag = 0;
                     score = 0;
                     startTime = System.currentTimeMillis();
                     pf.PictureFrame(this);
@@ -426,7 +426,7 @@ public class Main {
                                 int y2,
                                         x2;
                                 Location lotion;
-                                while ("AVFC" != "BCFC") {
+                                while ("AVFC" != "BcheatingFlagC") {
                                     String s3 = io.getString();
                                     if (s3 != null && s3.toUpperCase().startsWith("H")) {
                                         lotion = new Location(x, y, Location.DIRECTION.HORIZONTAL);
@@ -543,14 +543,14 @@ public class Main {
                                 }
                                 switch (yy) {
                                     case 0:
-                                        switch (cf) {
+                                        switch (cheatingFlag) {
                                             case 0:
                                                 System.out.println("Well done");
                                                 System.out.println("You get a 3 point bonus for honesty");
                                                 score++;
                                                 score++;
                                                 score++;
-                                                cf++;
+                                                cheatingFlag++;
                                                 break;
                                             case 1:
                                                 System.out
@@ -562,7 +562,7 @@ public class Main {
                                                     score -= 100;
                                                 }
                                                 playerName = playerName + "(scoundrel)";
-                                                cf++;
+                                                cheatingFlag++;
                                                 break;
                                             default:
                                                 System.out.println("Some people just don't learn");
