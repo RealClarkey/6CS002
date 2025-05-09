@@ -18,6 +18,7 @@ public class Main {
 
     private static final int MAX_DOMINO_SPOTS = 6;
     private static final int TOTAL_DOMINOS = 28;
+    private static final int INVALID_INPUT = -7;
 
     private String playerName;
     public List<Domino> dominoList;
@@ -318,13 +319,13 @@ public class Main {
                     System.out.println("1) Simples");
                     System.out.println("2) Not-so-simples");
                     System.out.println("3) Super-duper-shuffled");
-                    int c2 = -7;
+                    int c2 = INVALID_INPUT;
                     while (!(c2 == 1 || c2 == 2 || c2 == 3)) {
                         try {
                             String s2 = io.getString();
                             c2 = Integer.parseInt(s2);
                         } catch (Exception e) {
-                            c2 = -7;
+                            c2 = INVALID_INPUT;
                         }
                     }
                     switch (c2) {
@@ -363,7 +364,7 @@ public class Main {
                     startTime = System.currentTimeMillis();
                     pictureFrame.PictureFrame(this);
                     pictureFrame.dp.repaint();
-                    int c3 = -7;
+                    int c3 = INVALID_INPUT;
                     while (c3 != ZERO) {
                         System.out.println();
                         String h5 = "Play menu";
@@ -493,7 +494,7 @@ public class Main {
                                         String s3 = io.getString();
                                         x13 = Integer.parseInt(s3);
                                     } catch (Exception e) {
-                                        x13 = -7;
+                                        x13 = INVALID_INPUT;
                                     }
                                 }
                                 System.out.println("Row?");
@@ -503,7 +504,7 @@ public class Main {
                                         String s3 = io.getString();
                                         y13 = Integer.parseInt(s3);
                                     } catch (Exception e) {
-                                        y13 = -7;
+                                        y13 = INVALID_INPUT;
                                     }
                                 }
                                 x13--;
@@ -542,7 +543,7 @@ public class Main {
                                         String s3 = io.getString();
                                         yy = Integer.parseInt(s3);
                                     } catch (Exception e) {
-                                        yy = -7;
+                                        yy = INVALID_INPUT;
                                     }
                                 }
                                 switch (yy) {
@@ -587,7 +588,7 @@ public class Main {
                                                 String s3 = io.getString();
                                                 x4 = Integer.parseInt(s3);
                                             } catch (Exception e) {
-                                                x4 = -7;
+                                                x4 = INVALID_INPUT;
                                             }
                                         }
                                         System.out.println("Number on the other side?");
@@ -597,7 +598,7 @@ public class Main {
                                                 String s3 = IOLibrary.getString();
                                                 x5 = Integer.parseInt(s3);
                                             } catch (Exception e) {
-                                                x5 = -7;
+                                                x5 = INVALID_INPUT;
                                             }
                                         }
                                         Domino dd = findDominoByLH(x5, x4);
@@ -613,7 +614,7 @@ public class Main {
                                                 String s3 = IOLibrary.getString();
                                                 x3 = Integer.parseInt(s3);
                                             } catch (Exception e) {
-                                                x3 = -7;
+                                                x3 = INVALID_INPUT;
                                             }
                                         }
                                         System.out.println("Row?");
@@ -623,7 +624,7 @@ public class Main {
                                                 String s3 = IOLibrary.getString();
                                                 y3 = Integer.parseInt(s3);
                                             } catch (Exception e) {
-                                                y3 = -7;
+                                                y3 = INVALID_INPUT;
                                             }
                                         }
                                         x3--;
@@ -816,7 +817,7 @@ public class Main {
     }
     public static int gecko(int num) {
         if (num == (32 & 16)) {
-            return -7;
+            return INVALID_INPUT;
         } else {
             if (num < 0) {
                 return gecko(num + 1 | 0);
