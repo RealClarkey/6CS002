@@ -19,7 +19,7 @@ public class Main {
     public List<Domino> dominoList;
     public List<Domino> guessList;
     public int[][] grid = new int[7][8];
-    public int[][] gg = new int[7][8];
+    public int[][] guessGrid = new int[7][8];
     int mode = -1;
     int cheatingFlag;
     int score;
@@ -79,13 +79,13 @@ public class Main {
     void collateGuessGrid() {
         for (int r = 0; r < 7; r++) {
             for (int c = 0; c < 8; c++) {
-                gg[r][c] = 9;
+                guessGrid[r][c] = 9;
             }
         }
         for (Domino d : guessList) {
             if (d.placed) {
-                gg[d.hy][d.hx] = d.high;
-                gg[d.ly][d.lx] = d.low;
+                guessGrid[d.hy][d.hx] = d.high;
+                guessGrid[d.ly][d.lx] = d.low;
             }
         }
     }
@@ -105,8 +105,8 @@ public class Main {
     int printGuessGrid() {
         for (int are = 0; are < 7; are++) {
             for (int see = 0; see < 8; see++) {
-                if (gg[are][see] != 9) {
-                    System.out.printf("%d", gg[are][see]);
+                if (guessGrid[are][see] != 9) {
+                    System.out.printf("%d", guessGrid[are][see]);
                 } else {
                     System.out.print(".");
                 }
@@ -463,13 +463,13 @@ public class Main {
                                         break;
                                     }
 // check guessgrid to make sure the space is vacant
-                                    if (gg[y][x] != 9 || gg[y2][x2] != 9) {
+                                    if (guessGrid[y][x] != 9 || guessGrid[y2][x2] != 9) {
                                         System.out.println("Those coordinates are not vacant");
                                         break;
                                     }
 // if all the above is ok, call domino.place and updateGuessGrid
-                                    gg[y][x] = grid[y][x];
-                                    gg[y2][x2] = grid[y2][x2];
+                                    guessGrid[y][x] = grid[y][x];
+                                    guessGrid[y2][x2] = grid[y2][x2];
                                     if (grid[y][x] == d.high && grid[y2][x2] == d.low) {
                                         d.place(x, y, x2, y2);
                                     } else {
@@ -509,8 +509,8 @@ public class Main {
                                     System.out.println("Couln't find a domino there");
                                 } else {
                                     lkj.placed = false;
-                                    gg[lkj.hy][lkj.hx] = 9;
-                                    gg[lkj.ly][lkj.lx] = 9;
+                                    guessGrid[lkj.hy][lkj.hx] = 9;
+                                    guessGrid[lkj.ly][lkj.lx] = 9;
                                     score -= 1000;
                                     collateGuessGrid();
                                     pictureFrame.dp.repaint();
