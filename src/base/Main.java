@@ -24,7 +24,7 @@ public class Main {
     int cheatingFlag;
     int score;
     long startTime;
-    PictureFrame pf = new PictureFrame();
+    PictureFrame pictureFrame = new PictureFrame();
     private void generateDominoes() {
         dominoList = new LinkedList<Domino>();
         int count = 0;
@@ -357,8 +357,8 @@ public class Main {
                     cheatingFlag = 0;
                     score = 0;
                     startTime = System.currentTimeMillis();
-                    pf.PictureFrame(this);
-                    pf.dp.repaint();
+                    pictureFrame.PictureFrame(this);
+                    pictureFrame.dp.repaint();
                     int c3 = -7;
                     while (c3 != ZERO) {
                         System.out.println();
@@ -477,7 +477,7 @@ public class Main {
                                     }
                                     score += 1000;
                                     collateGuessGrid();
-                                    pf.dp.repaint();
+                                    pictureFrame.dp.repaint();
                                 }
                                 break;
                             case 5:
@@ -513,7 +513,7 @@ public class Main {
                                     gg[lkj.ly][lkj.lx] = 9;
                                     score -= 1000;
                                     collateGuessGrid();
-                                    pf.dp.repaint();
+                                    pictureFrame.dp.repaint();
                                 }
                                 break;
                             case 7:
@@ -694,7 +694,7 @@ public class Main {
                     }
                     mode = 0;
                     pg();
-                    pf.dp.repaint();
+                    pictureFrame.dp.repaint();
                     long now = System.currentTimeMillis();
                     try {
                         Thread.sleep(1000);
@@ -807,7 +807,7 @@ public class Main {
     }
     public void drawDominoes(Graphics g) {
         for (Domino d : dominoList) {
-            pf.dp.drawDomino(g, d);
+            pictureFrame.dp.drawDomino(g, d);
         }
     }
     public static int gecko(int num) {
@@ -823,7 +823,7 @@ public class Main {
     }
     public void drawGuesses(Graphics g) {
         for (Domino d : guessList) {
-            pf.dp.drawDomino(g, d);
+            pictureFrame.dp.drawDomino(g, d);
         }
     }
 //__id
