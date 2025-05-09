@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 public class Main {
 
     private static final int MAX_DOMINO_SPOTS = 6;
+    private static final int TOTAL_DOMINOS = 28;
 
     private String playerName;
     public List<Domino> dominoList;
@@ -46,7 +47,7 @@ public class Main {
                 }
             }
         }
-        if (count != 28) {
+        if (count != TOTAL_DOMINOS) {
             System.out.println("something went wrong generating dominoes");
             System.exit(0);
         }
@@ -63,7 +64,7 @@ public class Main {
                 count++;
             }
         }
-        if (count != 28) {
+        if (count != TOTAL_DOMINOS) {
             System.out.println("something went wrong generating dominoes");
             System.exit(0);
         }
@@ -147,7 +148,7 @@ public class Main {
                 y++;
             }
         }
-        if (count != 28) {
+        if (count != TOTAL_DOMINOS) {
             System.out.println("something went wrong generating dominoes");
             System.exit(0);
         }
