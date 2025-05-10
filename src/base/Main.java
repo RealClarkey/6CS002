@@ -42,6 +42,19 @@ public class Main {
         dominoList = generateDominoList(true);
     }
 
+    private void setupDominoes(int difficultyLevel) {
+        generateDominoes();
+        shuffleDominoesOrder();
+        placeDominoes();
+        if (difficultyLevel > 1) rotateDominoes();
+        if (difficultyLevel > 2) {
+            rotateDominoes();
+            rotateDominoes();
+            invertSomeDominoes();
+        }
+        collateGrid();
+    }
+
     private void generateGuesses() {
         guessList = generateDominoList(false);
     }
@@ -308,33 +321,8 @@ public class Main {
                             c2 = INVALID_INPUT;
                         }
                     }
-                    switch (c2) {
-                        case 1:
-                            generateDominoes();
-                            shuffleDominoesOrder();
-                            placeDominoes();
-                            collateGrid();
-// printGrid();
-                            break;
-                        case 2:
-                            generateDominoes();
-                            shuffleDominoesOrder();
-                            placeDominoes();
-                            rotateDominoes();
-                            collateGrid();
-// printGrid();
-                            break;
-                        default:
-                            generateDominoes();
-                            shuffleDominoesOrder();
-                            placeDominoes();
-                            rotateDominoes();
-                            rotateDominoes();
-                            rotateDominoes();
-                            invertSomeDominoes();
-                            collateGrid();
-                            break;
-                    }
+                    setupDominoes(c2);
+
                     printSolutionGrid();
                     generateGuesses();
                     collateGuessGrid();
