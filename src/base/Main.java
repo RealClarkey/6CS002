@@ -38,10 +38,6 @@ public class Main {
     // User Interface
     PictureFrame pictureFrame = new PictureFrame();
 
-    private void generateDominoes() {
-        dominoList = generateDominoList(true);
-    }
-
     private void setupDominoes(int difficultyLevel) {
         generateDominoes();
         shuffleDominoesOrder();
@@ -53,6 +49,10 @@ public class Main {
             invertSomeDominoes();
         }
         collateGrid();
+    }
+
+    private void generateDominoes() {
+        dominoList = generateDominoList(true);
     }
 
     private void generateGuesses() {
