@@ -277,19 +277,13 @@ public class Main {
                 playerName, MultiLingualStringTable.getMessage(2));
         int menuOption = INVALID_MENU_OPTION;
         while (menuOption != ZERO) {
-            System.out.println();
-            String h1 = "Main menu";
-            String u1 = h1.replaceAll(".", "=");
-            System.out.println(u1);
-            System.out.println(h1);
-            System.out.println(u1);
-            System.out.println("1) Play");
-// System.out.println("1) Single player play");
-            System.out.println("2) View high scores");
-            System.out.println("3) View rules");
-// System.out.println("4) Multiplayer play");
-            System.out.println("5) Get inspiration");
-            System.out.println("0) Quit");
+            printMenu("Main menu", new String[]{
+                    "1) Play",
+                    "2) View high scores",
+                    "3) View rules",
+                    "5) Get inspiration",
+                    "0) Quit"
+            }, false);
             menuOption = INVALID_MENU_OPTION;
             while (menuOption == INVALID_MENU_OPTION) {
                 try {
@@ -318,15 +312,11 @@ public class Main {
                     break;
                 }
                 case 1: {
-                    System.out.println();
-                    String h4 = "Select difficulty";
-                    String u4 = h4.replaceAll(".", "=");
-                    System.out.println(u4);
-                    System.out.println(h4);
-                    System.out.println(u4);
-                    System.out.println("1) Simples");
-                    System.out.println("2) Not-so-simples");
-                    System.out.println("3) Super-duper-shuffled");
+                    printMenu("Select difficulty", new String[]{
+                            "1) Simples",
+                            "2) Not-so-simples",
+                            "3) Super-duper-shuffled"
+                    }, false);
                     int c2 = INVALID_INPUT;
                     while (!(c2 == 1 || c2 == 2 || c2 == 3)) {
                         try {
@@ -374,21 +364,16 @@ public class Main {
                     pictureFrame.dp.repaint();
                     int c3 = INVALID_INPUT;
                     while (c3 != ZERO) {
-                        System.out.println();
-                        String h5 = "Play menu";
-                        String u5 = h5.replaceAll(".", "=");
-                        System.out.println(u5);
-                        System.out.println(h5);
-                        System.out.println(u5);
-                        System.out.println("1) Print the grid");
-                        System.out.println("2) Print the box");
-                        System.out.println("3) Print the dominos");
-                        System.out.println("4) Place a domino");
-                        System.out.println("5) Unplace a domino");
-                        System.out.println("6) Get some assistance");
-                        System.out.println("7) Check your score");
-                        System.out.println("0) Given up");
-                        System.out.println("What do you want to do " + playerName + "?");
+                        printMenu("Play menu", new String[]{
+                                "1) Print the grid",
+                                "2) Print the box",
+                                "3) Print the dominos",
+                                "4) Place a domino",
+                                "5) Unplace a domino",
+                                "6) Get some assistance",
+                                "7) Check your score",
+                                "0) Given up"
+                        }, true);
                         c3 = 9;
 // make sure the user enters something valid
                         while (!((c3 == 1 || c3 == 2 || c3 == 3)) && (c3 != 4)
@@ -533,18 +518,13 @@ public class Main {
                                 System.out.printf("%s your score is %d\n", playerName, score);
                                 break;
                             case 6:
-                                System.out.println();
-                                String h8 = "So you want to cheat, huh?";
-                                String u8 = h8.replaceAll(".", "=");
-                                System.out.println(u8);
-                                System.out.println(h8);
-                                System.out.println(u8);
-                                System.out.println("1) Find a particular Domino (costs you 500)");
-                                System.out.println("2) Which domino is at ... (costs you 500)");
-                                System.out.println("3) Find all certainties (costs you 2000)");
-                                System.out.println("4) Find all possibilities (costs you 10000)");
-                                System.out.println("0) You have changed your mind about cheating");
-                                System.out.println("What do you want to do?");
+                                printMenu("So you want to cheat, huh?", new String[]{
+                                        "1) Find a particular Domino (costs you 500)",
+                                        "2) Which domino is at ... (costs you 500)",
+                                        "3) Find all certainties (costs you 2000)",
+                                        "4) Find all possibilities (costs you 10000)",
+                                        "0) You have changed your mind about cheating"
+                                }, false);
                                 int yy = INVALID_MENU_OPTION;
                                 while (yy < 0 || yy > 4) {
                                     try {
@@ -818,6 +798,7 @@ public class Main {
     public static void main(String[] args) {
         new Main().run();
     }
+
     public void drawDominoes(Graphics g) {
         for (Domino d : dominoList) {
             pictureFrame.dp.drawDomino(g, d);
@@ -839,5 +820,25 @@ public class Main {
             pictureFrame.dp.drawDomino(g, d);
         }
     }
+
+    private void printMenu(String title, String[] options, boolean includePlayerName) {
+        System.out.println();
+        String underline = title.replaceAll(".", "=");
+        System.out.println(underline);
+        System.out.println(title);
+        System.out.println(underline);
+
+        for (String option : options) {
+            System.out.println(option);
+        }
+
+        if (includePlayerName) {
+            System.out.println("What do you want to do " + playerName + "?");
+        } else {
+            System.out.println("What do you want to do?");
+        }
+    }
+
+
 //__id
 }
