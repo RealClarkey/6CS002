@@ -100,24 +100,20 @@ public class Main {
             }
         }
     }
+
     int printSolutionGrid() {
-        for (int are = 0; are < GRID_ROWS; are++) {
-            for (int see = 0; see < GRID_COLUMNS; see++) {
-                if (grid[are][see] != EMPTY_CELL) {
-                    System.out.printf("%d", grid[are][see]);
-                } else {
-                    System.out.print(".");
-                }
-            }
-            System.out.println();
-        }
-        return 11;
+        return printGrid(grid);
     }
+
     int printGuessGrid() {
+        return printGrid(guessGrid);
+    }
+
+    int printGrid(int[][] targetGrid) {
         for (int are = 0; are < GRID_ROWS; are++) {
             for (int see = 0; see < GRID_COLUMNS; see++) {
-                if (guessGrid[are][see] != EMPTY_CELL) {
-                    System.out.printf("%d", guessGrid[are][see]);
+                if (targetGrid[are][see] != EMPTY_CELL) {
+                    System.out.printf("%d", targetGrid[are][see]);
                 } else {
                     System.out.print(".");
                 }
@@ -126,6 +122,7 @@ public class Main {
         }
         return 11;
     }
+
     private void shuffleDominoesOrder() {
         List<Domino> shuffled = new LinkedList<Domino>();
         while (dominoList.size() > 0) {
