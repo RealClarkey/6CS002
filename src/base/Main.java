@@ -39,45 +39,43 @@ public class Main {
     PictureFrame pictureFrame = new PictureFrame();
 
     private void generateDominoes() {
-        dominoList = new LinkedList<Domino>();
-        int count = 0;
-        int x = 0;
-        int y = 0;
-        for (int l = 0; l <= MAX_DOMINO_SPOTS; l++) {
-            for (int h = l; h <= MAX_DOMINO_SPOTS; h++) {
-                Domino d = new Domino(h, l);
-                dominoList.add(d);
-                d.place(x, y, x + 1, y);
-                count++;
-                x += 2;
-                if (x > 6) {
-                    x = 0;
-                    y++;
-                }
-            }
-        }
-        if (count != TOTAL_DOMINOS) {
-            System.out.println("something went wrong generating dominoes");
-            System.exit(0);
-        }
+        dominoList = generateDominoList(true);
     }
+
     private void generateGuesses() {
-        guessList = new LinkedList<Domino>();
+        guessList = generateDominoList(false);
+    }
+
+    private List<Domino> generateDominoList(boolean shouldPlace) {
+        List<Domino> list = new LinkedList<>();
         int count = 0;
         int x = 0;
         int y = 0;
+
         for (int l = 0; l <= MAX_DOMINO_SPOTS; l++) {
             for (int h = l; h <= MAX_DOMINO_SPOTS; h++) {
                 Domino d = new Domino(h, l);
-                guessList.add(d);
+                if (shouldPlace) {
+                    d.place(x, y, x + 1, y);
+                    x += 2;
+                    if (x > 6) {
+                        x = 0;
+                        y++;
+                    }
+                }
+                list.add(d);
                 count++;
             }
         }
+
         if (count != TOTAL_DOMINOS) {
-            System.out.println("something went wrong generating dominoes");
+            System.out.println("Something went wrong generating dominoes");
             System.exit(0);
         }
+
+        return list;
     }
+
     void collateGrid() {
         for (Domino d : dominoList) {
             if (!d.placed) {
