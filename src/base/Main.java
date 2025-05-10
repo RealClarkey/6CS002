@@ -31,233 +31,19 @@ public class Main {
     int score;
     long startTime;
     // Data Structures
-    public List<Domino> dominoList;
-    public List<Domino> guessList;
-    public int[][] grid = new int[GRID_ROWS][GRID_COLUMNS];
-    public int[][] guessGrid = new int[GRID_ROWS][GRID_COLUMNS];
+    //public List<Domino> dominoList; GameEngine
+    //public List<Domino> guessList;  GameEngine
+    //public int[][] grid = new int[GRID_ROWS][GRID_COLUMNS];
+    //public int[][] guessGrid = new int[GRID_ROWS][GRID_COLUMNS];
     // User Interface
     PictureFrame pictureFrame = new PictureFrame();
+    private GameEngine game = new GameEngine();
 
-    private void setupDominoes(int difficultyLevel) {
-        generateDominoes();
-        shuffleDominoesOrder();
-        placeDominoes();
-        if (difficultyLevel > 1) rotateDominoes();
-        if (difficultyLevel > 2) {
-            rotateDominoes();
-            rotateDominoes();
-            invertSomeDominoes();
-        }
-        collateGrid();
+    // Allows Main to act as a controller and keeps it encapsulated
+    public int[][] getGameGrid() {
+        return game.getGrid();
     }
 
-    private void generateDominoes() {
-        dominoList = generateDominoList(true);
-    }
-
-    private void generateGuesses() {
-        guessList = generateDominoList(false);
-    }
-
-    private List<Domino> generateDominoList(boolean shouldPlace) {
-        List<Domino> list = new LinkedList<>();
-        int count = 0;
-        int x = 0;
-        int y = 0;
-
-        for (int l = 0; l <= MAX_DOMINO_SPOTS; l++) {
-            for (int h = l; h <= MAX_DOMINO_SPOTS; h++) {
-                Domino d = new Domino(h, l);
-                if (shouldPlace) {
-                    d.place(x, y, x + 1, y);
-                    x += 2;
-                    if (x > 6) {
-                        x = 0;
-                        y++;
-                    }
-                }
-                list.add(d);
-                count++;
-            }
-        }
-
-        if (count != TOTAL_DOMINOS) {
-            System.out.println("Something went wrong generating dominoes");
-            System.exit(0);
-        }
-
-        return list;
-    }
-
-    void collateGrid() {
-        for (Domino d : dominoList) {
-            if (!d.placed) {
-                grid[d.hy][d.hx] = EMPTY_CELL;
-                grid[d.ly][d.lx] = EMPTY_CELL;
-            } else {
-                grid[d.hy][d.hx] = d.high;
-                grid[d.ly][d.lx] = d.low;
-            }
-        }
-    }
-    void collateGuessGrid() {
-        for (int r = 0; r < GRID_ROWS; r++) {
-            for (int c = 0; c < GRID_COLUMNS; c++) {
-                guessGrid[r][c] = EMPTY_CELL;
-            }
-        }
-        for (Domino d : guessList) {
-            if (d.placed) {
-                guessGrid[d.hy][d.hx] = d.high;
-                guessGrid[d.ly][d.lx] = d.low;
-            }
-        }
-    }
-
-    int printSolutionGrid() {
-        return printGrid(grid);
-    }
-
-    int printGuessGrid() {
-        return printGrid(guessGrid);
-    }
-
-    int printGrid(int[][] targetGrid) {
-        for (int are = 0; are < GRID_ROWS; are++) {
-            for (int see = 0; see < GRID_COLUMNS; see++) {
-                if (targetGrid[are][see] != EMPTY_CELL) {
-                    System.out.printf("%d", targetGrid[are][see]);
-                } else {
-                    System.out.print(".");
-                }
-            }
-            System.out.println();
-        }
-        return 11;
-    }
-
-    private void shuffleDominoesOrder() {
-        List<Domino> shuffled = new LinkedList<Domino>();
-        while (dominoList.size() > 0) {
-            int n = (int) (Math.random() * dominoList.size());
-            shuffled.add(dominoList.get(n));
-            dominoList.remove(n);
-        }
-        dominoList = shuffled;
-    }
-    private void invertSomeDominoes() {
-        for (Domino d : dominoList) {
-            if (Math.random() > 0.5) {
-                d.invert();
-            }
-        }
-    }
-    private void placeDominoes() {
-        int x = 0;
-        int y = 0;
-        int count = 0;
-        for (Domino d : dominoList) {
-            count++;
-            d.place(x, y, x + 1, y);
-            x += 2;
-            if (x > 6) {
-                x = 0;
-                y++;
-            }
-        }
-        if (count != TOTAL_DOMINOS) {
-            System.out.println("something went wrong generating dominoes");
-            System.exit(0);
-        }
-    }
-    private void rotateDominoes() {
-// for (Domino d : dominoes) {
-// if (Math.random() > 0.5) {
-// System.out.println("rotating " + d);
-// }
-// }
-        for (int x = 0; x < GRID_ROWS; x++) {
-            for (int y = 0; y < 6; y++) {
-                tryToRotateDominoAt(x, y);
-            }
-        }
-    }
-    private void tryToRotateDominoAt(int x, int y) {
-        Domino d = findDominoAt(dominoList, x, y);
-        if (thisIsTopLeftOfDomino(x, y, d)) {
-            if (d.ishl()) {
-                boolean weFancyARotation = Math.random() < 0.5;
-                if (weFancyARotation) {
-                    if (theCellBelowIsTopLeftOfHorizontalDomino(x, y)) {
-                        Domino e = findDominoAt(dominoList, x, y + 1);
-                        e.hx = x;
-                        e.lx = x;
-                        d.hx = x + 1;
-                        d.lx = x + 1;
-                        e.ly = y + 1;
-                        e.hy = y;
-                        d.ly = y + 1;
-                        d.hy = y;
-                    }
-                }
-            } else {
-                boolean weFancyARotation = Math.random() < 0.5;
-                if (weFancyARotation) {
-                    if (theCellToTheRightIsTopLeftOfVerticalDomino(x, y)) {
-                        Domino e = findDominoAt(dominoList, x + 1, y);
-                        e.hx = x;
-                        e.lx = x + 1;
-                        d.hx = x;
-                        d.lx = x + 1;
-                        e.ly = y + 1;
-                        e.hy = y + 1;
-                        d.ly = y;
-                        d.hy = y;
-                    }
-                }
-            }
-        }
-    }
-    private boolean theCellToTheRightIsTopLeftOfVerticalDomino(int x, int y) {
-        Domino e = findDominoAt(dominoList, x + 1, y);
-        return thisIsTopLeftOfDomino(x + 1, y, e) && !e.ishl();
-    }
-    private boolean theCellBelowIsTopLeftOfHorizontalDomino(int x, int y) {
-        Domino e = findDominoAt(dominoList, x, y + 1);
-        return thisIsTopLeftOfDomino(x, y + 1, e) && e.ishl();
-    }
-    private boolean thisIsTopLeftOfDomino(int x, int y, Domino d) {
-        return (x == Math.min(d.lx, d.hx)) && (y == Math.min(d.ly, d.hy));
-    }
-
-    private Domino findDominoAt(List<Domino> list, int x, int y) {
-        for (Domino d : list) {
-            if ((d.lx == x && d.ly == y) || (d.hx == x && d.hy == y)) {
-                return d;
-            }
-        }
-        return null;
-    }
-
-    private Domino findDominoByLH(List<Domino> list, int x, int y) {
-        for (Domino d : list) {
-            if ((d.low == x && d.high == y) || (d.high == x && d.low == y)) {
-                return d;
-            }
-        }
-        return null;
-    }
-
-    private void printDominoes() {
-        for (Domino d : dominoList) {
-            System.out.println(d);
-        }
-    }
-    private void printGuesses() {
-        for (Domino d : guessList) {
-            System.out.println(d);
-        }
-    }
     public final int ZERO = 0;
     public void run() {
         IOSpecialist io = new IOSpecialist();
@@ -298,7 +84,7 @@ public class Main {
                     System.out.println();
                     break;
                 case 0: {
-                    if (dominoList == null) {
+                    if (game.getDominoList() == null) {
                         System.out.println("It is a shame that you did not want to play");
                     } else {
                         System.out.println("Thankyou for playing");
@@ -321,11 +107,13 @@ public class Main {
                             c2 = INVALID_INPUT;
                         }
                     }
-                    setupDominoes(c2);
+                    game.setupDominoes(c2);
+                    //setupDominoes(c2);
 
-                    printSolutionGrid();
-                    generateGuesses();
-                    collateGuessGrid();
+                    game.printSolutionGrid();
+                    game.generateGuesses();
+                    game.collateGuessGrid();
+
                     mode = 1;
                     cheatingFlag = 0;
                     score = 0;
@@ -359,14 +147,14 @@ public class Main {
                             case 0:
                                 break;
                             case 1:
-                                printSolutionGrid();
+                                game.printSolutionGrid();
                                 break;
                             case 2:
-                                printGuessGrid();
+                                game.printGuessGrid();
                                 break;
                             case 3:
-                                Collections.sort(guessList);
-                                printGuesses();
+                                Collections.sort(game.getGuessList());
+                                game.printGuesses();
                                 break;
                             case 4:
                                 System.out.println("Where will the top left of the domino be?");
@@ -419,7 +207,7 @@ public class Main {
                                             .println("Problems placing the domino with that position and direction");
                                 } else {
 // find which domino this could be
-                                    Domino d = findDominoByLH(guessList, grid[y][x], grid[y2][x2]);
+                                    Domino d = game.findDominoByLH(game.getGuessList(), game.getGrid()[y][x], game.getGrid()[y2][x2]);
                                     if (d == null) {
                                         System.out.println("There is no such domino");
                                         break;
@@ -431,20 +219,20 @@ public class Main {
                                         break;
                                     }
 // check guessgrid to make sure the space is vacant
-                                    if (guessGrid[y][x] != 9 || guessGrid[y2][x2] != EMPTY_CELL) {
+                                    if (game.getGuessGrid()[y][x] != 9 || game.getGuessGrid()[y2][x2] != EMPTY_CELL) {
                                         System.out.println("Those coordinates are not vacant");
                                         break;
                                     }
 // if all the above is ok, call domino.place and updateGuessGrid
-                                    guessGrid[y][x] = grid[y][x];
-                                    guessGrid[y2][x2] = grid[y2][x2];
-                                    if (grid[y][x] == d.high && grid[y2][x2] == d.low) {
+                                    game.getGuessGrid()[y][x] = game.getGrid()[y][x];
+                                    game.getGuessGrid()[y2][x2] = game.getGrid()[y2][x2];
+                                    if (game.getGrid()[y][x] == d.high && game.getGrid()[y2][x2] == d.low) {
                                         d.place(x, y, x2, y2);
                                     } else {
                                         d.place(x2, y2, x, y);
                                     }
                                     score += 1000;
-                                    collateGuessGrid();
+                                    game.collateGuessGrid();
                                     pictureFrame.dp.repaint();
                                 }
                                 break;
@@ -472,15 +260,15 @@ public class Main {
                                 }
                                 x13--;
                                 y13--;
-                                Domino lkj = findDominoAt(guessList, x13, y13);
+                                Domino lkj = game.findDominoAt(game.getGuessList(), x13, y13);
                                 if (lkj == null) {
                                     System.out.println("Couln't find a domino there");
                                 } else {
                                     lkj.placed = false;
-                                    guessGrid[lkj.hy][lkj.hx] = EMPTY_CELL;
-                                    guessGrid[lkj.ly][lkj.lx] = EMPTY_CELL;
+                                    game.getGuessGrid()[lkj.hy][lkj.hx] = EMPTY_CELL;
+                                    game.getGuessGrid()[lkj.ly][lkj.lx] = EMPTY_CELL;
                                     score -= 1000;
-                                    collateGuessGrid();
+                                    game.collateGuessGrid();
                                     pictureFrame.dp.repaint();
                                 }
                                 break;
@@ -559,7 +347,7 @@ public class Main {
                                                 x5 = INVALID_INPUT;
                                             }
                                         }
-                                        Domino dd = findDominoByLH(dominoList, x5, x4);
+                                        Domino dd = game.findDominoByLH(game.getDominoList(), x5, x4);
                                         System.out.println(dd);
                                         break;
                                     case 2:
@@ -587,7 +375,7 @@ public class Main {
                                         }
                                         x3--;
                                         y3--;
-                                        Domino lkj2 = findDominoAt(dominoList, x3, y3);
+                                        Domino lkj2 = game.findDominoAt(game.getDominoList(), x3, y3);
                                         System.out.println(lkj2);
                                         break;
                                     case 3: {
@@ -595,8 +383,8 @@ public class Main {
                                         HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
                                         for (int r = 0; r < GRID_ROWS -1; r++) {
                                             for (int c = 0; c < GRID_ROWS; c++) {
-                                                Domino hd = findDominoByLH(guessList, grid[r][c], grid[r][c + 1]);
-                                                Domino vd = findDominoByLH(guessList, grid[r][c], grid[r + 1][c]);
+                                                Domino hd = game.findDominoByLH(game.getGuessList(), game.getGrid()[r][c], game.getGrid()[r][c + 1]);
+                                                Domino vd = game.findDominoByLH(game.getGuessList(), game.getGrid()[r][c], game.getGrid()[r + 1][c]);
                                                 List<Location> l = map.get(hd);
                                                 if (l == null) {
                                                     l = new LinkedList<Location>();
@@ -626,8 +414,8 @@ public class Main {
                                         HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
                                         for (int r = 0; r < GRID_ROWS - 1; r++) {
                                             for (int c = 0; c < GRID_ROWS; c++) {
-                                                Domino hd = findDominoByLH(guessList, grid[r][c], grid[r][c + 1]);
-                                                Domino vd = findDominoByLH(guessList, grid[r][c], grid[r + 1][c]);
+                                                Domino hd = game.findDominoByLH(game.getGuessList(), game.getGrid()[r][c], game.getGrid()[r][c + 1]);
+                                                Domino vd = game.findDominoByLH(game.getGuessList(), game.getGrid()[r][c], game.getGrid()[r + 1][c]);
                                                 List<Location> l = map.get(hd);
                                                 if (l == null) {
                                                     l = new LinkedList<Location>();
@@ -656,7 +444,7 @@ public class Main {
                         }
                     }
                     mode = 0;
-                    printSolutionGrid();
+                    game.printSolutionGrid();
                     pictureFrame.dp.repaint();
                     long now = System.currentTimeMillis();
                     try {
@@ -671,8 +459,8 @@ public class Main {
                     recordTheScore();
                     System.out.println("Here is the solution:");
                     System.out.println();
-                    Collections.sort(dominoList);
-                    printDominoes();
+                    Collections.sort(game.getDominoList());
+                    game.printDominoes();
                     System.out.println("you scored " + score);
                 }
                 break;
@@ -770,7 +558,7 @@ public class Main {
     }
 
     public void drawDominoes(Graphics g) {
-        for (Domino d : dominoList) {
+        for (Domino d : game.getDominoList()) {
             pictureFrame.dp.drawDomino(g, d);
         }
     }
@@ -786,7 +574,7 @@ public class Main {
         }
     }
     public void drawGuesses(Graphics g) {
-        for (Domino d : guessList) {
+        for (Domino d : game.getGuessList()) {
             pictureFrame.dp.drawDomino(g, d);
         }
     }

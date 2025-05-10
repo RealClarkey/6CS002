@@ -14,7 +14,7 @@ public class PictureFrame {
             for (int are = 0; are < 7; are++) {
                 for (int see = 0; see < 8; see++) {
                     drawDigitGivenCentre(g, 30 + see * 20, 30 + are * 20, 20,
-                            master.grid[are][see]);
+                            master.getGameGrid()[are][see]);
                 }
             }
         }
