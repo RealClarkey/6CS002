@@ -9,31 +9,34 @@ import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
-
 /**
  * @author Kevan Buckley, maintained by __student
  * @version 2.0, 2014
  */
 public class Main {
-
+    // Domino Attributes
     private static final int MAX_DOMINO_SPOTS = 6;
     private static final int TOTAL_DOMINOS = 28;
+    // Input Validations
     private static final int INVALID_INPUT = -7;
-
+    // Grid Attributes
     private static final int GRID_ROWS = 7;
     private static final int GRID_COLUMNS = 8;
     private static final int EMPTY_CELL = 9;
-
+    // Player and Game Logic Attributes
     private String playerName;
-    public List<Domino> dominoList;
-    public List<Domino> guessList;
-    public int[][] grid = new int[GRID_ROWS][GRID_COLUMNS];
-    public int[][] guessGrid = new int[GRID_ROWS][GRID_COLUMNS];
     int mode = -1;
     int cheatingFlag;
     int score;
     long startTime;
+    // Data Structures
+    public List<Domino> dominoList;
+    public List<Domino> guessList;
+    public int[][] grid = new int[GRID_ROWS][GRID_COLUMNS];
+    public int[][] guessGrid = new int[GRID_ROWS][GRID_COLUMNS];
+    // User Interface
     PictureFrame pictureFrame = new PictureFrame();
+
     private void generateDominoes() {
         dominoList = new LinkedList<Domino>();
         int count = 0;
@@ -98,7 +101,7 @@ public class Main {
             }
         }
     }
-    int pg() {
+    int printSolutionGrid() {
         for (int are = 0; are < GRID_ROWS; are++) {
             for (int see = 0; see < GRID_COLUMNS; see++) {
                 if (grid[are][see] != EMPTY_CELL) {
@@ -359,7 +362,7 @@ public class Main {
                             collateGrid();
                             break;
                     }
-                    pg();
+                    printSolutionGrid();
                     generateGuesses();
                     collateGuessGrid();
                     mode = 1;
@@ -400,7 +403,7 @@ public class Main {
                             case 0:
                                 break;
                             case 1:
-                                pg();
+                                printSolutionGrid();
                                 break;
                             case 2:
                                 printGuessGrid();
@@ -702,7 +705,7 @@ public class Main {
                         }
                     }
                     mode = 0;
-                    pg();
+                    printSolutionGrid();
                     pictureFrame.dp.repaint();
                     long now = System.currentTimeMillis();
                     try {
