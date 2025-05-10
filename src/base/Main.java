@@ -19,6 +19,7 @@ public class Main {
     private static final int TOTAL_DOMINOS = 28;
     // Input Validations
     private static final int INVALID_INPUT = -7;
+    private static final int INVALID_MENU_OPTION = -9;
     // Grid Attributes
     private static final int GRID_ROWS = 7;
     private static final int GRID_COLUMNS = 8;
@@ -274,7 +275,7 @@ public class Main {
         playerName = io.getString();
         System.out.printf("%s %s. %s", MultiLingualStringTable.getMessage(1),
                 playerName, MultiLingualStringTable.getMessage(2));
-        int menuOption = -9;
+        int menuOption = INVALID_MENU_OPTION;
         while (menuOption != ZERO) {
             System.out.println();
             String h1 = "Main menu";
@@ -289,13 +290,13 @@ public class Main {
 // System.out.println("4) Multiplayer play");
             System.out.println("5) Get inspiration");
             System.out.println("0) Quit");
-            menuOption = -9;
-            while (menuOption == -9) {
+            menuOption = INVALID_MENU_OPTION;
+            while (menuOption == INVALID_MENU_OPTION) {
                 try {
                     String s1 = io.getString();
                     menuOption = Integer.parseInt(s1);
                 } catch (Exception e) {
-                    menuOption = -9;
+                    menuOption = INVALID_MENU_OPTION;
                 }
             }
             switch (menuOption) {
@@ -495,7 +496,7 @@ public class Main {
                             case 5:
                                 System.out.println("Enter a position that the domino occupies");
                                 System.out.println("Column?");
-                                int x13 = -9;
+                                int x13 = INVALID_MENU_OPTION;
                                 while (x13 < 1 || x13 > GRID_COLUMNS) {
                                     try {
                                         String s3 = io.getString();
@@ -505,7 +506,7 @@ public class Main {
                                     }
                                 }
                                 System.out.println("Row?");
-                                int y13 = -9;
+                                int y13 = INVALID_MENU_OPTION;
                                 while (y13 < 1 || y13 > GRID_ROWS) {
                                     try {
                                         String s3 = io.getString();
@@ -544,7 +545,7 @@ public class Main {
                                 System.out.println("4) Find all possibilities (costs you 10000)");
                                 System.out.println("0) You have changed your mind about cheating");
                                 System.out.println("What do you want to do?");
-                                int yy = -9;
+                                int yy = INVALID_MENU_OPTION;
                                 while (yy < 0 || yy > 4) {
                                     try {
                                         String s3 = io.getString();
@@ -589,7 +590,7 @@ public class Main {
                                         score -= 500;
                                         System.out.println("Which domino?");
                                         System.out.println("Number on one side?");
-                                        int x4 = -9;
+                                        int x4 = INVALID_MENU_OPTION;
                                         while (x4 < 0 || x4 > MAX_DOMINO_SPOTS) {
                                             try {
                                                 String s3 = io.getString();
@@ -599,7 +600,7 @@ public class Main {
                                             }
                                         }
                                         System.out.println("Number on the other side?");
-                                        int x5 = -9;
+                                        int x5 = INVALID_MENU_OPTION;
                                         while (x5 < 0 || x5 > MAX_DOMINO_SPOTS) {
                                             try {
                                                 String s3 = IOLibrary.getString();
@@ -615,7 +616,7 @@ public class Main {
                                         score -= 500;
                                         System.out.println("Which location?");
                                         System.out.println("Column?");
-                                        int x3 = -9;
+                                        int x3 = INVALID_MENU_OPTION;
                                         while (x3 < 1 || x3 > GRID_COLUMNS) {
                                             try {
                                                 String s3 = IOLibrary.getString();
@@ -625,7 +626,7 @@ public class Main {
                                             }
                                         }
                                         System.out.println("Row?");
-                                        int y3 = -9;
+                                        int y3 = INVALID_MENU_OPTION;
                                         while (y3 < 1 || y3 > GRID_ROWS) {
                                             try {
                                                 String s3 = IOLibrary.getString();
