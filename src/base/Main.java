@@ -170,13 +170,13 @@ public class Main {
         }
     }
     private void tryToRotateDominoAt(int x, int y) {
-        Domino d = findDominoAt(x, y);
+        Domino d = findDominoAt(dominoList, x, y);
         if (thisIsTopLeftOfDomino(x, y, d)) {
             if (d.ishl()) {
                 boolean weFancyARotation = Math.random() < 0.5;
                 if (weFancyARotation) {
                     if (theCellBelowIsTopLeftOfHorizontalDomino(x, y)) {
-                        Domino e = findDominoAt(x, y + 1);
+                        Domino e = findDominoAt(dominoList, x, y + 1);
                         e.hx = x;
                         e.lx = x;
                         d.hx = x + 1;
@@ -191,7 +191,7 @@ public class Main {
                 boolean weFancyARotation = Math.random() < 0.5;
                 if (weFancyARotation) {
                     if (theCellToTheRightIsTopLeftOfVerticalDomino(x, y)) {
-                        Domino e = findDominoAt(x + 1, y);
+                        Domino e = findDominoAt(dominoList, x + 1, y);
                         e.hx = x;
                         e.lx = x + 1;
                         d.hx = x;
@@ -206,48 +206,35 @@ public class Main {
         }
     }
     private boolean theCellToTheRightIsTopLeftOfVerticalDomino(int x, int y) {
-        Domino e = findDominoAt(x + 1, y);
+        Domino e = findDominoAt(dominoList, x + 1, y);
         return thisIsTopLeftOfDomino(x + 1, y, e) && !e.ishl();
     }
     private boolean theCellBelowIsTopLeftOfHorizontalDomino(int x, int y) {
-        Domino e = findDominoAt(x, y + 1);
+        Domino e = findDominoAt(dominoList, x, y + 1);
         return thisIsTopLeftOfDomino(x, y + 1, e) && e.ishl();
     }
     private boolean thisIsTopLeftOfDomino(int x, int y, Domino d) {
         return (x == Math.min(d.lx, d.hx)) && (y == Math.min(d.ly, d.hy));
     }
-    private Domino findDominoAt(int x, int y) {
-        for (Domino d : dominoList) {
+
+    private Domino findDominoAt(List<Domino> list, int x, int y) {
+        for (Domino d : list) {
             if ((d.lx == x && d.ly == y) || (d.hx == x && d.hy == y)) {
                 return d;
             }
         }
         return null;
     }
-    private Domino findGuessAt(int x, int y) {
-        for (Domino d : guessList) {
-            if ((d.lx == x && d.ly == y) || (d.hx == x && d.hy == y)) {
-                return d;
-            }
-        }
-        return null;
-    }
-    private Domino findGuessByLH(int x, int y) {
-        for (Domino d : guessList) {
+
+    private Domino findDominoByLH(List<Domino> list, int x, int y) {
+        for (Domino d : list) {
             if ((d.low == x && d.high == y) || (d.high == x && d.low == y)) {
                 return d;
             }
         }
         return null;
     }
-    private Domino findDominoByLH(int x, int y) {
-        for (Domino d : dominoList) {
-            if ((d.low == x && d.high == y) || (d.high == x && d.low == y)) {
-                return d;
-            }
-        }
-        return null;
-    }
+
     private void printDominoes() {
         for (Domino d : dominoList) {
             System.out.println(d);
@@ -444,7 +431,7 @@ public class Main {
                                             .println("Problems placing the domino with that position and direction");
                                 } else {
 // find which domino this could be
-                                    Domino d = findGuessByLH(grid[y][x], grid[y2][x2]);
+                                    Domino d = findDominoByLH(guessList, grid[y][x], grid[y2][x2]);
                                     if (d == null) {
                                         System.out.println("There is no such domino");
                                         break;
@@ -497,7 +484,7 @@ public class Main {
                                 }
                                 x13--;
                                 y13--;
-                                Domino lkj = findGuessAt(x13, y13);
+                                Domino lkj = findDominoAt(guessList, x13, y13);
                                 if (lkj == null) {
                                     System.out.println("Couln't find a domino there");
                                 } else {
@@ -584,7 +571,7 @@ public class Main {
                                                 x5 = INVALID_INPUT;
                                             }
                                         }
-                                        Domino dd = findDominoByLH(x5, x4);
+                                        Domino dd = findDominoByLH(dominoList, x5, x4);
                                         System.out.println(dd);
                                         break;
                                     case 2:
@@ -612,7 +599,7 @@ public class Main {
                                         }
                                         x3--;
                                         y3--;
-                                        Domino lkj2 = findDominoAt(x3, y3);
+                                        Domino lkj2 = findDominoAt(dominoList, x3, y3);
                                         System.out.println(lkj2);
                                         break;
                                     case 3: {
@@ -620,8 +607,8 @@ public class Main {
                                         HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
                                         for (int r = 0; r < GRID_ROWS -1; r++) {
                                             for (int c = 0; c < GRID_ROWS; c++) {
-                                                Domino hd = findGuessByLH(grid[r][c], grid[r][c + 1]);
-                                                Domino vd = findGuessByLH(grid[r][c], grid[r + 1][c]);
+                                                Domino hd = findDominoByLH(guessList, grid[r][c], grid[r][c + 1]);
+                                                Domino vd = findDominoByLH(guessList, grid[r][c], grid[r + 1][c]);
                                                 List<Location> l = map.get(hd);
                                                 if (l == null) {
                                                     l = new LinkedList<Location>();
@@ -651,8 +638,8 @@ public class Main {
                                         HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
                                         for (int r = 0; r < GRID_ROWS - 1; r++) {
                                             for (int c = 0; c < GRID_ROWS; c++) {
-                                                Domino hd = findGuessByLH(grid[r][c], grid[r][c + 1]);
-                                                Domino vd = findGuessByLH(grid[r][c], grid[r + 1][c]);
+                                                Domino hd = findDominoByLH(guessList, grid[r][c], grid[r][c + 1]);
+                                                Domino vd = findDominoByLH(guessList, grid[r][c], grid[r + 1][c]);
                                                 List<Location> l = map.get(hd);
                                                 if (l == null) {
                                                     l = new LinkedList<Location>();
