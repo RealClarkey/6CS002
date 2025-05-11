@@ -1,34 +1,21 @@
 package base;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.io.*;
-import java.net.InetAddress;
-import java.text.DateFormat;
-import java.util.*;
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
 
 /**
  * @author Kevan Buckley, maintained by __student
  * @version 2.0, 2014
  */
 public class Main {
-    // Domino Attributes
-    private static final int MAX_DOMINO_SPOTS = 6;
+
     // Input Validations
     private static final int INVALID_INPUT = -7;
     private static final int INVALID_MENU_OPTION = -9;
-    // Grid Attributes
-    private static final int GRID_ROWS = 7;
-    private static final int GRID_COLUMNS = 8;
-    private static final int EMPTY_CELL = 9;
+
     // Player and Game Logic Attributes
     private String playerName;
     int mode = -1;
-    int cheatingFlag;
     int score;
-    long startTime;
     // Class Objects
     PictureFrame pictureFrame;
     private GameEngine game = new GameEngine();
