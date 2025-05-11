@@ -11,6 +11,7 @@ import java.util.List;
 public class MenuController {
     private static final int INVALID_INPUT = -7;
     IOSpecialist io = new IOSpecialist();
+    GameEngine game = new GameEngine();
 
     public void quitMessage(List<Domino> dominoList) {
         if (dominoList == null) {
@@ -140,10 +141,6 @@ public class MenuController {
         }
         return difficulty;
     }
-
-
-
-
 
 
     private void printMenu(String title, String[] options, boolean includePlayerName, String playerName) {

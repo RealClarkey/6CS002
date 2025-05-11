@@ -16,7 +16,6 @@ import javax.swing.JScrollPane;
 public class Main {
     // Domino Attributes
     private static final int MAX_DOMINO_SPOTS = 6;
-    private static final int TOTAL_DOMINOS = 28;
     // Input Validations
     private static final int INVALID_INPUT = -7;
     private static final int INVALID_MENU_OPTION = -9;
@@ -71,23 +70,9 @@ public class Main {
                 case 1: {
                     //
                     int difficulty = menu.selectDifficulty(playerName);
-                    /*
-                    printMenu("Select difficulty", new String[]{
-                            "1) Simples",
-                            "2) Not-so-simples",
-                            "3) Super-duper-shuffled"
-                    }, false);
-                    int c2 = INVALID_INPUT;
-                    while (!(c2 == 1 || c2 == 2 || c2 == 3)) {
-                        try {
-                            String s2 = io.getString();
-                            c2 = Integer.parseInt(s2);
-                        } catch (Exception e) {
-                            c2 = INVALID_INPUT;
-                        }
-                    } */
-                    //game.setupDominoes(c2);
-                    game.setupDominoes(difficulty);
+                    //menu.setupGame(difficulty);
+
+                    /*game.setupDominoes(difficulty);
                     game.printSolutionGrid();
                     game.generateGuesses();
                     game.collateGuessGrid();
@@ -97,7 +82,7 @@ public class Main {
                     score = 0;
                     startTime = System.currentTimeMillis();
                     pictureFrame.PictureFrame(this);
-                    pictureFrame.dp.repaint();
+                    pictureFrame.dp.repaint();*/
 
                     //
 
