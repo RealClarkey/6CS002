@@ -30,11 +30,6 @@ public class Main {
     int cheatingFlag;
     int score;
     long startTime;
-    // Data Structures
-    //public List<Domino> dominoList; GameEngine
-    //public List<Domino> guessList;  GameEngine
-    //public int[][] grid = new int[GRID_ROWS][GRID_COLUMNS];
-    //public int[][] guessGrid = new int[GRID_ROWS][GRID_COLUMNS];
     // User Interface
     PictureFrame pictureFrame = new PictureFrame();
     private GameEngine game = new GameEngine();
@@ -598,5 +593,4 @@ public class Main {
     }
 
 
-//__id
 }

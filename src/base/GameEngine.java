@@ -1,34 +1,4 @@
 package base;
-
-
-// Domino Management:
-// SetupDominoes() - DONE
-// generateDominoes() and generateGuesses() - DONE
-// generateDominoList() -
-// placeDominoes()
-// shuffleDominoes()
-// rotateDominoes()
-// invertSomeDominoes()
-// tryToRotateDominoAt()
-// findDominoAt()
-// findDominoByLH()
-
-// Grid Management:
-// collateGrid()
-// printGrid()
-// printSolutionGrid()
-// printGuessGrid()
-
-// Game State Management:
-// recordTheScore()
-// calculateScoreBonus()
-
-// Helper Methods:
-// thisIsTopLeftOfDomino()
-// theCellBelowIsTopLeftOfHorizontalDomino()
-// theCellToTheRightIsTopLeftOfVerticalDomino()
-
-
 import java.util.LinkedList;
 import java.util.List;
 
