@@ -155,7 +155,7 @@ public class GameEngine {
             if (d.ishl()) {
                 boolean weFancyARotation = Math.random() < 0.5;
                 if (weFancyARotation) {
-                    if (theCellBelowIsTopLeftOfHorizontalDomino(x, y)) {
+                    if (isTopLeftHorizontalBelow(x, y)) {
                         Domino e = findDominoAt(dominoList, x, y + 1);
                         e.hx = x;
                         e.lx = x;
@@ -170,7 +170,7 @@ public class GameEngine {
             } else {
                 boolean weFancyARotation = Math.random() < 0.5;
                 if (weFancyARotation) {
-                    if (theCellToTheRightIsTopLeftOfVerticalDomino(x, y)) {
+                    if (isTopLeftVerticalRight(x, y)) {
                         Domino e = findDominoAt(dominoList, x + 1, y);
                         e.hx = x;
                         e.lx = x + 1;
@@ -222,12 +222,12 @@ public class GameEngine {
         return (x == Math.min(d.lx, d.hx)) && (y == Math.min(d.ly, d.hy));
     }
 
-    private boolean theCellToTheRightIsTopLeftOfVerticalDomino(int x, int y) {
+    private boolean isTopLeftVerticalRight(int x, int y) {
         Domino e = findDominoAt(dominoList, x + 1, y);
         return thisIsTopLeftOfDomino(x + 1, y, e) && !e.ishl();
     }
 
-    private boolean theCellBelowIsTopLeftOfHorizontalDomino(int x, int y) {
+    private boolean isTopLeftHorizontalBelow(int x, int y) {
         Domino e = findDominoAt(dominoList, x, y + 1);
         return thisIsTopLeftOfDomino(x, y + 1, e) && e.ishl();
     }
