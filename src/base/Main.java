@@ -30,9 +30,10 @@ public class Main {
     int cheatingFlag;
     int score;
     long startTime;
-    // User Interface
+    // Class Objects
     PictureFrame pictureFrame = new PictureFrame();
     private GameEngine game = new GameEngine();
+    private MenuController menu = new MenuController();
 
     // Allows Main to act as a controller and keeps it encapsulated
     public int[][] getGameGrid() {
@@ -42,14 +43,9 @@ public class Main {
     public final int ZERO = 0;
     public void run() {
 
+        playerName = menu.greetPlayer();
         IOSpecialist io = new IOSpecialist();
-        System.out.println("Welcome To Abominodo - The Best Dominoes Puzzle Game in the Universe");
-        System.out.println("Version 2.1 (c), Kevan Buckley, 2014");
-        System.out.println();
-        System.out.println(MultiLingualStringTable.getMessage(0));
-        playerName = io.getString();
-        System.out.printf("%s %s. %s", MultiLingualStringTable.getMessage(1),
-                playerName, MultiLingualStringTable.getMessage(2));
+
 
         int menuOption = INVALID_MENU_OPTION;
         while (menuOption != ZERO) {
@@ -586,6 +582,5 @@ public class Main {
             System.out.println("What do you want to do?");
         }
     }
-
 
 }
