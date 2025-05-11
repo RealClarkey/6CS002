@@ -6,11 +6,29 @@ import java.io.*;
 import java.net.InetAddress;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class MenuController {
 
+    public void quitMessage(List<Domino> dominoList) {
+        if (dominoList == null) {
+            System.out.println("It is a shame that you did not want to play");
+        } else {
+            System.out.println("Thankyou for playing");
+        }
+        System.exit(0);
+    }
 
-    public String greetPlayer() {
+    public void getInspiration() {
+        int index = (int) (Math.random() * (Quotes.stuff.length / 3));
+        String what = Quotes.stuff[index * 3];
+        String who = Quotes.stuff[1 + index * 3];
+        System.out.printf("%s said \"%s\"", who, what);
+        System.out.println();
+        System.out.println();
+    }
+
+    public String greetPlayer() { //
         IOSpecialist io = new IOSpecialist();
         System.out.println("Welcome To Abominodo - The Best Dominoes Puzzle Game in the Universe");
         System.out.println("Version 2.1 (c), Kevan Buckley, 2014");
@@ -97,5 +115,10 @@ public class MenuController {
         InetAddress ipa = IOLibrary.getIPAddress();
         new ConnectionGenius(ipa).fireUpGame();
     }
+
+    public void playGame () {
+
+    }
+
 
 }

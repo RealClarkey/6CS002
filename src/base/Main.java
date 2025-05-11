@@ -66,23 +66,8 @@ public class Main {
                 }
             }
             switch (menuOption) {
-                case 5:
-                    int index = (int) (Math.random() * (_Q.stuff.length / 3));
-                    String what = _Q.stuff[index * 3];
-                    String who = _Q.stuff[1 + index * 3];
-                    System.out.printf("%s said \"%s\"", who, what);
-                    System.out.println();
-                    System.out.println();
-                    break;
-                case 0: {
-                    if (game.getDominoList() == null) {
-                        System.out.println("It is a shame that you did not want to play");
-                    } else {
-                        System.out.println("Thankyou for playing");
-                    }
-                    System.exit(0);
-                    break;
-                }
+                case 5: menu.getInspiration(); break;
+                case 0: menu.quitMessage(game.getDominoList()); break;
                 case 1: {
                     printMenu("Select difficulty", new String[]{
                             "1) Simples",
