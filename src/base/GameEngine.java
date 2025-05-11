@@ -232,12 +232,12 @@ public class GameEngine {
         return thisIsTopLeftOfDomino(x, y + 1, e) && e.ishl();
     }
 
-    int printSolutionGrid() {
-        return printGrid(grid);
+    public void printSolutionGrid() {
+        printGrid(grid);
     }
 
-    int printGuessGrid() {
-        return printGrid(guessGrid);
+    public void printGuessGrid() {
+        printGrid(guessGrid);
     }
 
     int printGrid(int[][] targetGrid) {
