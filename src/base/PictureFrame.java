@@ -73,16 +73,6 @@ public class PictureFrame {
         protected void paintComponent(Graphics g) {
             g.setColor(Color.YELLOW);
             g.fillRect(0, 0, getWidth(), getHeight());
-// numbaz(g);
-//
-// if (master!=null && master.orig != null) {
-// drawRoll(g, master.orig);
-// }
-// if (reroll != null) {
-// drawReroll(g, reroll);
-// }
-//
-// drawGrid(g);
             Location l = new Location(1,2);
             if (master.mode == 1) {
                 l.drawGridLines(g);
