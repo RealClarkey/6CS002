@@ -17,20 +17,37 @@ public class GameEngine {
     public int[][] grid = new int[GRID_ROWS][GRID_COLUMNS];
     public int[][] guessGrid = new int[GRID_ROWS][GRID_COLUMNS];
 
+    public enum DifficultyLevel {
+        EASY, MEDIUM, HARD
+    }
+
 
     // Create a set of dominoes for the game.
     public void setupDominoes(int difficultyLevel){
         generateDominoes();
         shuffleDominoesOrder();
         placeDominoes();
-        if (difficultyLevel > 1) rotateDominoes() ;
-        if (difficultyLevel > 2) {
-            rotateDominoes();
-            rotateDominoes();
-            invertSomeDominoes();
-        }
+        applyDifficultyModifiers(DifficultyLevel difficultyLevel);
         collateGrid();
     }
+
+    private void applyDifficultyModifiers(DifficultyLevel level) {
+        switch (level) {
+            case MEDIUM:
+                rotateDominoes();
+                break;
+            case HARD:
+                rotateDominoes();
+                rotateDominoes();
+                invertSomeDominoes();
+                break;
+            case EASY:
+            default:
+                break;
+        }
+    }
+
+
 
     // Create a list of Dominoes.
     public List<Domino> generateDominoList(boolean shouldPlace) {
