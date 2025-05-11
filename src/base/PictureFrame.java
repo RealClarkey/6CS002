@@ -93,7 +93,8 @@ public class PictureFrame {
         }
     }
     public DominoPanel dp;
-    public void PictureFrame(Main sf) {
+
+    public PictureFrame(Main sf) {
         master = sf;
         if (dp == null) {
             JFrame f = new JFrame("Abominodo");
@@ -104,7 +105,7 @@ public class PictureFrame {
             f.setVisible(true);
         }
     }
-    public void reset() {
+    //public void reset() {
 // TODO Auto-generated method stub
-    }
+    //}
 }
