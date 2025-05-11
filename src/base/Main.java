@@ -69,6 +69,9 @@ public class Main {
                 case 5: menu.getInspiration(); break;
                 case 0: menu.quitMessage(game.getDominoList()); break;
                 case 1: {
+                    //
+                    int difficulty = menu.selectDifficulty(playerName);
+                    /*
                     printMenu("Select difficulty", new String[]{
                             "1) Simples",
                             "2) Not-so-simples",
@@ -82,8 +85,9 @@ public class Main {
                         } catch (Exception e) {
                             c2 = INVALID_INPUT;
                         }
-                    }
-                    game.setupDominoes(c2);
+                    } */
+                    //game.setupDominoes(c2);
+                    game.setupDominoes(difficulty);
                     game.printSolutionGrid();
                     game.generateGuesses();
                     game.collateGuessGrid();
@@ -94,6 +98,9 @@ public class Main {
                     startTime = System.currentTimeMillis();
                     pictureFrame.PictureFrame(this);
                     pictureFrame.dp.repaint();
+
+                    //
+
                     int c3 = INVALID_INPUT;
                     while (c3 != ZERO) {
                         printMenu("Play menu", new String[]{

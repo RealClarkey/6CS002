@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 public class MenuController {
+    private static final int INVALID_INPUT = -7;
+    IOSpecialist io = new IOSpecialist();
 
     public void quitMessage(List<Domino> dominoList) {
         if (dominoList == null) {
@@ -118,6 +120,48 @@ public class MenuController {
 
     public void playGame () {
 
+    }
+
+    public int selectDifficulty(String playerName) {
+        printMenu("Select difficulty", new String[]{
+                "1) Simples",
+                "2) Not-so-simples",
+                "3) Super-duper-shuffled"
+        }, false, playerName);
+
+        int difficulty = INVALID_INPUT;
+        while (!(difficulty == 1 || difficulty == 2 || difficulty == 3)) {
+            try {
+                String input = io.getString();
+                difficulty = Integer.parseInt(input);
+            } catch (Exception e) {
+                difficulty = INVALID_INPUT;
+            }
+        }
+        return difficulty;
+    }
+
+
+
+
+
+
+    private void printMenu(String title, String[] options, boolean includePlayerName, String playerName) {
+        System.out.println();
+        String underline = title.replaceAll(".", "=");
+        System.out.println(underline);
+        System.out.println(title);
+        System.out.println(underline);
+
+        for (String option : options) {
+            System.out.println(option);
+        }
+
+        if (includePlayerName) {
+            System.out.println("What do you want to do " + playerName + "?");
+        } else {
+            System.out.println("What do you want to do?");
+        }
     }
 
 
