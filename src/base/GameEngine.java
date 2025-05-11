@@ -274,7 +274,3 @@ public class GameEngine {
 
 
 }
-// dominoList - game.getDominoList
-// guessList - game.getGuessList
-// grid - game.getGrid
-// guessGrid - game.getGuessGrid
