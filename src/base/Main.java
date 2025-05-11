@@ -41,16 +41,16 @@ public class Main {
 
     public final int ZERO = 0;
     public void run() {
+
         IOSpecialist io = new IOSpecialist();
-        System.out
-                .println("Welcome To Abominodo - The Best Dominoes Puzzle Game in the Universe");
+        System.out.println("Welcome To Abominodo - The Best Dominoes Puzzle Game in the Universe");
         System.out.println("Version 2.1 (c), Kevan Buckley, 2014");
-//    System.out.println("Serial number " + Special.getStamp());
         System.out.println();
         System.out.println(MultiLingualStringTable.getMessage(0));
         playerName = io.getString();
         System.out.printf("%s %s. %s", MultiLingualStringTable.getMessage(1),
                 playerName, MultiLingualStringTable.getMessage(2));
+
         int menuOption = INVALID_MENU_OPTION;
         while (menuOption != ZERO) {
             printMenu("Main menu", new String[]{
@@ -103,8 +103,6 @@ public class Main {
                         }
                     }
                     game.setupDominoes(c2);
-                    //setupDominoes(c2);
-
                     game.printSolutionGrid();
                     game.generateGuesses();
                     game.collateGuessGrid();
@@ -128,7 +126,7 @@ public class Main {
                                 "0) Given up"
                         }, true);
                         c3 = 9;
-// make sure the user enters something valid
+                        // make sure the user enters something valid
                         while (!((c3 == 1 || c3 == 2 || c3 == 3)) && (c3 != 4)
                                 && (c3 != ZERO) && (c3 != 5) && (c3 != 6) && (c3 != 7)) {
                             try {
@@ -154,7 +152,7 @@ public class Main {
                             case 4:
                                 System.out.println("Where will the top left of the domino be?");
                                 System.out.println("Column?");
-// make sure the user enters something valid
+                                // make sure the user enters something valid
                                 int x = Location.getInt();
                                 while (x < 1 || x > GRID_COLUMNS) {
                                     x = Location.getInt();
@@ -173,7 +171,6 @@ public class Main {
                                 x--;
                                 y--;
                                 System.out.println("Horizontal or Vertical (H or V)?");
-                                boolean horiz;
                                 int y2,
                                         x2;
                                 Location lotion;
@@ -182,13 +179,11 @@ public class Main {
                                     if (s3 != null && s3.toUpperCase().startsWith("H")) {
                                         lotion = new Location(x, y, Location.DIRECTION.HORIZONTAL);
                                         System.out.println("Direction to place is " + lotion.d);
-                                        horiz = true;
                                         x2 = x + 1;
                                         y2 = y;
                                         break;
                                     }
                                     if (s3 != null && s3.toUpperCase().startsWith("V")) {
-                                        horiz = false;
                                         lotion = new Location(x, y, Location.DIRECTION.VERTICAL);
                                         System.out.println("Direction to place is " + lotion.d);
                                         x2 = x;
@@ -445,7 +440,7 @@ public class Main {
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
-// TODO Auto-generated catch block
+                    // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                     int gap = (int) (now - startTime);
