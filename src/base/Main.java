@@ -452,32 +452,8 @@ public class Main {
                 break;
 
                 case 2: menu.showHighScores(playerName); break;
-                case 3: {
-                    String h4 = "Rules";
-                    String u4 = h4.replaceAll(".", "=");
-                    System.out.println(u4);
-                    System.out.println(h4);
-                    System.out.println(u4);
-                    System.out.println(h4);
-                    JFrame f = new JFrame("Rules by __student");
-                    f.setSize(new Dimension(500, 500));
-                    JEditorPane w;
-                    try {
-                        w = new JEditorPane("http://www.scit.wlv.ac.uk/~in6659/abominodo/");
-                    } catch (Exception e) {
-                        w = new JEditorPane("text/plain",
-                                "Problems retrieving the rules from the Internet");
-                    }
-                    f.setContentPane(new JScrollPane(w));
-                    f.setVisible(true);
-                    f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    break;
-                }
-                case 4:
-                    System.out
-                            .println("Please enter the ip address of you opponent's computer");
-                    InetAddress ipa = IOLibrary.getIPAddress();
-                    new ConnectionGenius(ipa).fireUpGame();
+                case 3: menu.showRules(); break;
+                case 4: menu.networkPlay(); break;
             }
         }
     }

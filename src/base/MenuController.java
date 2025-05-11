@@ -1,6 +1,9 @@
 package base;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
+import java.net.InetAddress;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -62,6 +65,37 @@ public class MenuController {
             System.out.println("Malfunction!!");
             System.exit(0);
         }
+    }
+
+    // This method doesn't work correctly now - assuming the wlv.ac.uk link is no longer active (05/05/2025)
+    // Replaced the old URL with an example I found online - purely for assignment testing.
+    public void showRules() {
+        String h4 = "Rules";
+        String u4 = h4.replaceAll(".", "=");
+        System.out.println(u4);
+        System.out.println(h4);
+        System.out.println(u4);
+        System.out.println(h4);
+        JFrame f = new JFrame("Rules by __student");
+        f.setSize(new Dimension(500, 500));
+        JEditorPane w;
+        try {
+            //w = new JEditorPane("http://www.scit.wlv.ac.uk/~in6659/abominodo/");
+            w = new JEditorPane("https://xhtml.club/");
+        } catch (Exception e) {
+            w = new JEditorPane("text/plain",
+                    "Problems retrieving the rules from the Internet");
+        }
+        f.setContentPane(new JScrollPane(w));
+        f.setVisible(true);
+        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+
+    public void networkPlay() {
+        System.out
+                .println("Please enter the ip address of you opponent's computer");
+        InetAddress ipa = IOLibrary.getIPAddress();
+        new ConnectionGenius(ipa).fireUpGame();
     }
 
 }
