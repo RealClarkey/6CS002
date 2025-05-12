@@ -71,11 +71,11 @@ public class GameEngine {
     }
 
     public void generateDominoes() {
-        dominoList = generateDominoList(true);
+        dominoList = DominoFactory.generateDominoList(true);
     }
 
     public void generateGuesses() {
-        guessList = generateDominoList(false);
+        guessList = DominoFactory.generateDominoList(false);
     }
 
     private void shuffleDominoesOrder() {
