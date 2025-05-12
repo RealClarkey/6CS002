@@ -37,7 +37,6 @@ public class GameEngine {
         }
     }
 
-
     public void generateDominoes() {
         dominoList = DominoFactory.generateDominoList(true);
     }
