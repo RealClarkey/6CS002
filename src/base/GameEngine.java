@@ -153,9 +153,6 @@ public class GameEngine {
         }
     }
 
-
-
-
     public Domino findDominoAt(List<Domino> list, int x, int y) {
         for (Domino d : list) {
             if ((d.lx == x && d.ly == y) || (d.hx == x && d.hy == y)) {
