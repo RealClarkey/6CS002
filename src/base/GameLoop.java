@@ -233,37 +233,7 @@ public class GameLoop {
             case 0: handleHonestyChoice(); break;
             case 1: findSpecificDomino(); break;
             case 2: findDominoAtLocation(); break;
-            case 3: {
-                score -= 2000;
-                HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
-                for (int r = 0; r < GRID_ROWS -1; r++) {
-                    for (int c = 0; c < GRID_ROWS; c++) {
-                        Domino hd = game.findDominoByLH(game.getGuessList(), game.getGrid()[r][c], game.getGrid()[r][c + 1]);
-                        Domino vd = game.findDominoByLH(game.getGuessList(), game.getGrid()[r][c], game.getGrid()[r + 1][c]);
-                        List<Location> l = map.get(hd);
-                        if (l == null) {
-                            l = new LinkedList<Location>();
-                            map.put(hd, l);
-                        }
-                        l.add(new Location(r, c));
-                        l = map.get(vd);
-                        if (l == null) {
-                            l = new LinkedList<Location>();
-                            map.put(vd, l);
-                        }
-                        l.add(new Location(r, c));
-                    }
-                }
-                for (Domino key : map.keySet()) {
-                    List<Location> locs = map.get(key);
-                    if (locs.size() == 1) {
-                        Location loc = locs.get(0);
-                        System.out.printf("[%d%d]", key.high, key.low);
-                        System.out.println(loc);
-                    }
-                }
-                break;
-            }
+            case 3: findAllPossibilities(); break;
             case 4: {
                 score -= 10000;
                 HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
@@ -435,6 +405,37 @@ public class GameLoop {
         y3--;
         Domino lkj2 = game.findDominoAt(game.getDominoList(), x3, y3);
         System.out.println(lkj2);
+    }
+
+    private void findAllPossibilities(){
+        score -= 2000;
+        HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
+        for (int r = 0; r < GRID_ROWS -1; r++) {
+            for (int c = 0; c < GRID_ROWS; c++) {
+                Domino hd = game.findDominoByLH(game.getGuessList(), game.getGrid()[r][c], game.getGrid()[r][c + 1]);
+                Domino vd = game.findDominoByLH(game.getGuessList(), game.getGrid()[r][c], game.getGrid()[r + 1][c]);
+                List<Location> l = map.get(hd);
+                if (l == null) {
+                    l = new LinkedList<Location>();
+                    map.put(hd, l);
+                }
+                l.add(new Location(r, c));
+                l = map.get(vd);
+                if (l == null) {
+                    l = new LinkedList<Location>();
+                    map.put(vd, l);
+                }
+                l.add(new Location(r, c));
+            }
+        }
+        for (Domino key : map.keySet()) {
+            List<Location> locs = map.get(key);
+            if (locs.size() == 1) {
+                Location loc = locs.get(0);
+                System.out.printf("[%d%d]", key.high, key.low);
+                System.out.println(loc);
+            }
+        }
     }
 
 }
