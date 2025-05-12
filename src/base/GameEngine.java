@@ -174,11 +174,6 @@ public class GameEngine {
         return null;
     }
 
-    public void printDominoes() {
-        for (Domino d : dominoList) {
-            System.out.println(d);
-        }
-    }
     public void printGuesses() {
         for (Domino d : guessList) {
             System.out.println(d);
