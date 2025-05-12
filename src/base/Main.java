@@ -1,21 +1,17 @@
 package base;
 import java.awt.Graphics;
-import java.io.*;
 
 /**
  * @author Kevan Buckley, maintained by __student
  * @version 2.0, 2014
  */
 public class Main {
-
     // Input Validations
     private static final int INVALID_INPUT = -7;
     private static final int INVALID_MENU_OPTION = -9;
-
     // Player and Game Logic Attributes
     private String playerName;
     int mode = -1;
-    int score;
     // Class Objects
     PictureFrame pictureFrame;
     private GameEngine game = new GameEngine();
@@ -68,21 +64,7 @@ public class Main {
             }
         }
     }
-    private void recordTheScore() {
-        try {
-            PrintWriter pw = new PrintWriter(new FileWriter("score.txt", true));
-            String n = playerName.replaceAll(",", "_");
-            pw.print(n);
-            pw.print(",");
-            pw.print(score);
-            pw.print(",");
-            pw.println(System.currentTimeMillis());
-            pw.flush();
-            pw.close();
-        } catch (Exception e) {
-            System.out.println("Something went wrong saving scores");
-        }
-    }
+
     public static void main(String[] args) {
         new Main().run();
     }
