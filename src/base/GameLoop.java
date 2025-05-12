@@ -227,47 +227,10 @@ public class GameLoop {
                 "4) Find all possibilities (costs you 10000)",
                 "0) You have changed your mind about cheating"
         }, false);
-        int yy = INVALID_MENU_OPTION;
-        while (yy < 0 || yy > 4) {
-            try {
-                String s3 = io.getString();
-                yy = Integer.parseInt(s3);
-            } catch (Exception e) {
-                yy = INVALID_INPUT;
-            }
-        }
-        switch (yy) {
-            case 0:
-                switch (cheatingFlag) {
-                    case 0:
-                        System.out.println("Well done");
-                        System.out.println("You get a 3 point bonus for honesty");
-                        score++;
-                        score++;
-                        score++;
-                        cheatingFlag++;
-                        break;
-                    case 1:
-                        System.out
-                                .println("So you though you could get the 3 point bonus twice");
-                        System.out.println("You need to check your score");
-                        if (score > 0) {
-                            score = -score;
-                        } else {
-                            score -= 100;
-                        }
-                        this.displayName = this.displayName + "(scoundrel)";
-                        cheatingFlag++;
-                        break;
-                    default:
-                        System.out.println("Some people just don't learn");
-                        this.displayName = this.displayName.replace("scoundrel",
-                                "pathetic scoundrel");
-                        for (int i = 0; i < 10000; i++) {
-                            score--;
-                        }
-                }
-                break;
+
+        int choice = getInput("Select option: ", 0, 4);
+        switch (choice) {
+            case 0: handleHonestyChoice(); break;
             case 1:
                 score -= 500;
                 System.out.println("Which domino?");
@@ -423,4 +386,51 @@ public class GameLoop {
             }
         }
     }
+
+    private int getInput(String prompt, int min, int max){
+        int input = INVALID_INPUT;
+        while (input < min || input > max) {
+            try {
+                String s3 = io.getString();
+                input = Integer.parseInt(s3);
+            } catch (Exception e) {
+                input = INVALID_INPUT;
+            }
+        }
+
+        return input;
+    }
+
+    private void handleHonestyChoice(){
+        switch (cheatingFlag) {
+            case 0:
+                System.out.println("Well done");
+                System.out.println("You get a 3 point bonus for honesty");
+                score++;
+                score++;
+                score++;
+                cheatingFlag++;
+                break;
+            case 1:
+                System.out
+                        .println("So you though you could get the 3 point bonus twice");
+                System.out.println("You need to check your score");
+                if (score > 0) {
+                    score = -score;
+                } else {
+                    score -= 100;
+                }
+                this.displayName = this.displayName + "(scoundrel)";
+                cheatingFlag++;
+                break;
+            default:
+                System.out.println("Some people just don't learn");
+                this.displayName = this.displayName.replace("scoundrel",
+                        "pathetic scoundrel");
+                for (int i = 0; i < 10000; i++) {
+                    score--;
+                }
+        }
+    }
+
 }
