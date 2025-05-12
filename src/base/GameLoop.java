@@ -231,60 +231,8 @@ public class GameLoop {
         int choice = getInput("Select option: ", 0, 4);
         switch (choice) {
             case 0: handleHonestyChoice(); break;
-            case 1:
-                score -= 500;
-                System.out.println("Which domino?");
-                System.out.println("Number on one side?");
-                int x4 = INVALID_MENU_OPTION;
-                while (x4 < 0 || x4 > MAX_DOMINO_SPOTS) {
-                    try {
-                        String s3 = io.getString();
-                        x4 = Integer.parseInt(s3);
-                    } catch (Exception e) {
-                        x4 = INVALID_INPUT;
-                    }
-                }
-                System.out.println("Number on the other side?");
-                int x5 = INVALID_MENU_OPTION;
-                while (x5 < 0 || x5 > MAX_DOMINO_SPOTS) {
-                    try {
-                        String s3 = IOLibrary.getString();
-                        x5 = Integer.parseInt(s3);
-                    } catch (Exception e) {
-                        x5 = INVALID_INPUT;
-                    }
-                }
-                Domino dd = game.findDominoByLH(game.getDominoList(), x5, x4);
-                System.out.println(dd);
-                break;
-            case 2:
-                score -= 500;
-                System.out.println("Which location?");
-                System.out.println("Column?");
-                int x3 = INVALID_MENU_OPTION;
-                while (x3 < 1 || x3 > GRID_COLUMNS) {
-                    try {
-                        String s3 = IOLibrary.getString();
-                        x3 = Integer.parseInt(s3);
-                    } catch (Exception e) {
-                        x3 = INVALID_INPUT;
-                    }
-                }
-                System.out.println("Row?");
-                int y3 = INVALID_MENU_OPTION;
-                while (y3 < 1 || y3 > GRID_ROWS) {
-                    try {
-                        String s3 = IOLibrary.getString();
-                        y3 = Integer.parseInt(s3);
-                    } catch (Exception e) {
-                        y3 = INVALID_INPUT;
-                    }
-                }
-                x3--;
-                y3--;
-                Domino lkj2 = game.findDominoAt(game.getDominoList(), x3, y3);
-                System.out.println(lkj2);
-                break;
+            case 1: findSpecificDomino(); break;
+            case 2: findDominoAtLocation(); break;
             case 3: {
                 score -= 2000;
                 HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
@@ -431,6 +379,62 @@ public class GameLoop {
                     score--;
                 }
         }
+    }
+
+    private void findSpecificDomino(){
+        score -= 500;
+        System.out.println("Which domino?");
+        System.out.println("Number on one side?");
+        int x4 = INVALID_MENU_OPTION;
+        while (x4 < 0 || x4 > MAX_DOMINO_SPOTS) {
+            try {
+                String s3 = io.getString();
+                x4 = Integer.parseInt(s3);
+            } catch (Exception e) {
+                x4 = INVALID_INPUT;
+            }
+        }
+        System.out.println("Number on the other side?");
+        int x5 = INVALID_MENU_OPTION;
+        while (x5 < 0 || x5 > MAX_DOMINO_SPOTS) {
+            try {
+                String s3 = IOLibrary.getString();
+                x5 = Integer.parseInt(s3);
+            } catch (Exception e) {
+                x5 = INVALID_INPUT;
+            }
+        }
+        Domino dd = game.findDominoByLH(game.getDominoList(), x5, x4);
+        System.out.println(dd);
+    }
+
+    private void findDominoAtLocation(){
+        score -= 500;
+        System.out.println("Which location?");
+        System.out.println("Column?");
+        int x3 = INVALID_MENU_OPTION;
+        while (x3 < 1 || x3 > GRID_COLUMNS) {
+            try {
+                String s3 = IOLibrary.getString();
+                x3 = Integer.parseInt(s3);
+            } catch (Exception e) {
+                x3 = INVALID_INPUT;
+            }
+        }
+        System.out.println("Row?");
+        int y3 = INVALID_MENU_OPTION;
+        while (y3 < 1 || y3 > GRID_ROWS) {
+            try {
+                String s3 = IOLibrary.getString();
+                y3 = Integer.parseInt(s3);
+            } catch (Exception e) {
+                y3 = INVALID_INPUT;
+            }
+        }
+        x3--;
+        y3--;
+        Domino lkj2 = game.findDominoAt(game.getDominoList(), x3, y3);
+        System.out.println(lkj2);
     }
 
 }
