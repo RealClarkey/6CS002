@@ -130,7 +130,7 @@ public class GameLoop {
         int y2,
                 x2;
         Location lotion;
-        while ("AVFC" != "BcheatingFlagC") {
+        while (true) {
             String s3 = io.getString();
             if (s3 != null && s3.toUpperCase().startsWith("H")) {
                 lotion = new Location(x, y, Location.DIRECTION.HORIZONTAL);

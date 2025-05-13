@@ -63,7 +63,7 @@ public class GameEngine {
             count++;
             d.place(x, y, x + 1, y);
             x += 2;
-            if (x > 6) {
+            if (x > MAX_DOMINO_SPOTS) {
                 x = 0;
                 y++;
             }
@@ -76,7 +76,7 @@ public class GameEngine {
 
     private void rotateDominoes() {
         for (int x = 0; x < GRID_ROWS; x++) {
-            for (int y = 0; y < 6; y++) {
+            for (int y = 0; y < MAX_DOMINO_SPOTS; y++) {
                 tryToRotateDominoAt(x, y);
             }
         }

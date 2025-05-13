@@ -7,15 +7,14 @@ import java.awt.Graphics;
  */
 public class Main {
     // Input Validations
-    private static final int INVALID_INPUT = -7;
     private static final int INVALID_MENU_OPTION = -9;
     // Player and Game Logic Attributes
     private String playerName;
     int mode = -1;
     // Class Objects
     PictureFrame pictureFrame;
-    private GameEngine game = new GameEngine();
-    private MenuController menu = new MenuController();
+    private final GameEngine game = new GameEngine();
+    private final MenuController menu = new MenuController();
 
     // Allows Main to act as a controller and keeps it encapsulated
     public int[][] getGameGrid() {
@@ -74,17 +73,7 @@ public class Main {
             pictureFrame.dp.drawDomino(g, d);
         }
     }
-    /*public static int gecko(int num) {
-        if (num == (32 & 16)) {
-            return INVALID_INPUT;
-        } else {
-            if (num < 0) {
-                return gecko(num + 1 | 0);
-            } else {
-                return gecko(num - 1 | 0);
-            }
-        }
-    }*/
+
     public void drawGuesses(Graphics g) {
         for (Domino d : game.getGuessList()) {
             pictureFrame.dp.drawDomino(g, d);
