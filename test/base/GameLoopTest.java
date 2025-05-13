@@ -6,6 +6,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.LinkedList;
+import java.util.List;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,6 +23,8 @@ public class GameLoopTest {
      *    - printScore() (1)
      *    - printMenu() (1)
      *    - gecko() (2)
+     *    - handleHonestyChoice() (1)
+     *    - findAllCertainties() (1)
      */
     private GameLoop loop;
 
@@ -154,12 +158,46 @@ public class GameLoopTest {
         assertEquals(-7, result);
     }
 
+    @Test
+    void testHandleHonestyChoiceFirstTimeAddsThreePoints() throws Exception {
+        GameLoop loop = new GameLoop(new GameEngine(), new PictureFrame(new Main()), "Tester");
+        // Set cheatingFlag = 0, score = 0
+        Field score = GameLoop.class.getDeclaredField("score");
+        Field flag = GameLoop.class.getDeclaredField("cheatingFlag");
+        score.setAccessible(true);
+        flag.setAccessible(true);
+        score.setInt(loop, 0);
+        flag.setInt(loop, 0);
+        Method method = GameLoop.class.getDeclaredMethod("handleHonestyChoice");
+        method.setAccessible(true);
+        method.invoke(loop);
+        assertEquals(3, score.getInt(loop));  // 3 points added
+        assertEquals(1, flag.getInt(loop));   // cheatingFlag incremented
+    }
 
-
-
-
-
-
+    @Test
+    void testFindAllCertaintiesDeductsScore() throws Exception {
+        GameEngine engine = new GameEngine();
+        // Setup grid values so that vertical/horizontal checks are safe
+        int[][] grid = engine.getGrid();
+        grid[0][0] = 1;
+        grid[0][1] = 2;
+        grid[1][0] = 1;
+        // Add one guess domino that matches both pairs
+        Domino d = new Domino(1, 2);
+        d.placed = false;
+        engine.guessList = new LinkedList<>();
+        engine.guessList.add(d);
+        GameLoop loop = new GameLoop(engine, new PictureFrame(new Main()), "Tester");
+        // Set score
+        Field score = GameLoop.class.getDeclaredField("score");
+        score.setAccessible(true);
+        score.setInt(loop, 3000);
+        Method method = GameLoop.class.getDeclaredMethod("findAllCertainties");
+        method.setAccessible(true);
+        method.invoke(loop);
+        assertEquals(1000, score.getInt(loop));  // Deducts 2000
+    }
 
 }
 
