@@ -27,7 +27,6 @@ public class Main {
         playerName = menu.greetPlayer();
         IOSpecialist io = new IOSpecialist();
 
-
         int menuOption = INVALID_MENU_OPTION;
         while (menuOption != ZERO) {
             printMenu("Main menu", new String[]{
