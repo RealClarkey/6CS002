@@ -51,6 +51,7 @@ public class Main {
                 case 1: {
                     this.mode = 1;
                     int difficulty = menu.selectDifficulty(playerName);
+                    game.generateGuesses();
                     pictureFrame = new PictureFrame(this);
                     GameLoop loop = new GameLoop(game, pictureFrame, playerName);
                     loop.start(difficulty);
