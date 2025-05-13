@@ -14,14 +14,14 @@ public class ConnectionGenius {
         connectToWebService();
         awayWeGo();
     }
-    public void downloadWebVersion(){
+    private void downloadWebVersion(){
         System.out.println("Getting specialised web version.");
         System.out.println("Wait a couple of moments");
     }
-    public void connectToWebService() {
+    private void connectToWebService() {
         System.out.println("Connecting");
     }
-    public void awayWeGo(){
+    private void awayWeGo(){
         System.out.println("Ready to play");
     }
 }
