@@ -74,7 +74,7 @@ public class Main {
             pictureFrame.dp.drawDomino(g, d);
         }
     }
-    public static int gecko(int num) {
+    /*public static int gecko(int num) {
         if (num == (32 & 16)) {
             return INVALID_INPUT;
         } else {
@@ -84,7 +84,7 @@ public class Main {
                 return gecko(num - 1 | 0);
             }
         }
-    }
+    }*/
     public void drawGuesses(Graphics g) {
         for (Domino d : game.getGuessList()) {
             pictureFrame.dp.drawDomino(g, d);

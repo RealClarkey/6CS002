@@ -1,5 +1,7 @@
 package base;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -74,6 +76,7 @@ public class GameLoop {
         int bonus = 60000 - (int)(now - startTime);
         score += bonus > 0 ? bonus / 1000 : 0;
         System.out.println("you scored " + score);
+        recordTheScore();
     }
 
     private void printPlayMenu() {
@@ -437,5 +440,22 @@ public class GameLoop {
             System.out.println();
         }
     }
+
+    private void recordTheScore() {
+        try {
+            PrintWriter pw = new PrintWriter(new FileWriter("score.txt", true));
+            String n = playerName.replaceAll(",", "_");
+            pw.print(n);
+            pw.print(",");
+            pw.print(score);
+            pw.print(",");
+            pw.println(System.currentTimeMillis());
+            pw.flush();
+            pw.close();
+        } catch (Exception e) {
+            System.out.println("Something went wrong saving scores");
+        }
+    }
+
 
 }
