@@ -178,7 +178,6 @@ public class GameLoop {
             game.collateGuessGrid();
             pictureFrame.dp.repaint();
         }
-        return;
     }
 
     private void unplaceDomino() {
