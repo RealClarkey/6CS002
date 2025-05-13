@@ -118,10 +118,6 @@ public class MenuController {
         new ConnectionGenius(ipa).fireUpGame();
     }
 
-    public void playGame () {
-
-    }
-
     public int selectDifficulty(String playerName) {
         printMenu("Select difficulty", new String[]{
                 "1) Simples",
