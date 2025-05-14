@@ -1,6 +1,7 @@
 package base;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class GameEngine {
 
@@ -10,6 +11,8 @@ public class GameEngine {
     private static final int GRID_ROWS = 7;
     private static final int GRID_COLUMNS = 8;
     private static final int EMPTY_CELL = 9;
+    private static final int DOMINOES_PER_ROW = GRID_COLUMNS / 2; // 8 / 2 = 4
+    private static final int CELLS_PER_ROW = DOMINOES_PER_ROW * 2; // 4 × 2 = 8
 
     // Data Structure
     public List<Domino> dominoList;
@@ -56,20 +59,15 @@ public class GameEngine {
     }
 
     private void placeDominoes() {
-        int x = 0;
-        int y = 0;
-        int count = 0;
-        for (Domino d : dominoList) {
-            count++;
-            d.place(x, y, x + 1, y);
-            x += 2;
-            if (x > MAX_DOMINO_SPOTS) {
-                x = 0;
-                y++;
-            }
-        }
-        if (count != TOTAL_DOMINOS) {
-            System.out.println("something went wrong generating dominoes");
+        IntStream.range(0, dominoList.size())
+                .forEach(i -> {
+                    int x = (i * 2) % CELLS_PER_ROW;
+                    int y = (i * 2) / CELLS_PER_ROW;
+                    dominoList.get(i).place(x, y, x + 1, y);
+                });
+
+        if (dominoList.size() != TOTAL_DOMINOS) {
+            System.out.println("Something went wrong generating dominoes");
             System.exit(0);
         }
     }
