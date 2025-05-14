@@ -9,7 +9,7 @@ public class DominoFactory {
     private static final int TOTAL_DOMINOS = 28;
 
     public static List<Domino> generateDominoList(boolean shouldPlace) {
-        // Generate a list of all unique domino pairs (h, l) where h >= l
+        // Generate a list of unique domino pairs.
         List<Domino> dominos = IntStream.rangeClosed(0, MAX_DOMINO_SPOTS)
                 .boxed()
                 .flatMap(low -> IntStream.rangeClosed(low, MAX_DOMINO_SPOTS)
@@ -19,9 +19,8 @@ public class DominoFactory {
         if (dominos.size() != TOTAL_DOMINOS) {
             throw new IllegalStateException("Incorrect number of dominos generated");
         }
-
-        // If placement is requested, return a new list with positioned dominos
         if (shouldPlace) {
+            // IntStream used instead of for loops.
             return IntStream.range(0, TOTAL_DOMINOS)
                     .mapToObj(i -> {
                         int x = (i * 2) % 14; // 14 = max X size for placement (7 dominos per row * 2)
